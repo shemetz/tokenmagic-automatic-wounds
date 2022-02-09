@@ -116,8 +116,8 @@ const removeWoundsOnToken = async (token) => {
   return token._TMFXsetFlag(workingFlags)
 }
 
-function rgbToHex(r, g, b) {
-  return "0x" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+function rgbToHex (r, g, b) {
+  return '0x' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
 
 const setBloodColor = async (token, color) => {
@@ -263,9 +263,9 @@ const macroReapplyWoundsBasedOnCurrentHp = async () => {
 const macroOpenBloodColorPicker = async () => {
   const tokens = canvas.tokens.controlled
   const firstToken = tokens[0]
-  if (!firstToken) return ui.notifications.warn("No tokens selected, can't open blood color picker.")
+  if (!firstToken) return ui.notifications.warn('No tokens selected, can\'t open blood color picker.')
   if (firstToken.actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)) {
-    return ui.notifications.warn("Automatic wounds are disabled on this token, can't open blood color picker.")
+    return ui.notifications.warn('Automatic wounds are disabled on this token, can\'t open blood color picker.')
   }
   await TokenMagicAutomaticWounds.openBloodColorPicker(tokens)
 }
