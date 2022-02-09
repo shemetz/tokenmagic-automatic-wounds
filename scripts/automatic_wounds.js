@@ -254,7 +254,7 @@ const macroToggleAutoWoundsForToken = async () => {
 }
 
 const macroReapplyWoundsBasedOnCurrentHp = async () => {
-  const tok = canvas.scene.controlled[0]
+  const tok = canvas.tokens.controlled[0]
   if (!tok)
     return ui.notifications.warn(`You need to select a token for the Reapply Wounds Based On Current HP macro to work.`)
   await TokenMagicAutomaticWounds.reapplyWoundsBasedOnCurrentHp(tok)
