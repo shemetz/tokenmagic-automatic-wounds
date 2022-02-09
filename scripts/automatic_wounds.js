@@ -154,7 +154,7 @@ const setBloodColor = async (token, color) => {
 
 const openBloodColorPicker = async (tokens) => {
   const firstToken = tokens[0]
-  const bloodColor = firstToken.actor.getFlag(MODULE_ID, 'bloodColor') || DEFAULT_BLOOD_COLOR
+  const bloodColor = firstToken.actor.getFlag(MODULE_ID, FLAG_BLOOD_COLOR) || DEFAULT_BLOOD_COLOR
   const bloodColorInputValue = bloodColor.replace('0x', '#')
   const defaultColorNums = [
     parseInt(DEFAULT_BLOOD_COLOR.substring(2, 4), 16),
