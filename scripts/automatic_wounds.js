@@ -152,13 +152,8 @@ const setBloodColor = async (token, color) => {
   await token._TMFXsetFlag(workingFlags)
 }
 
-const openBloodColorPicker = async () => {
-  const tokens = canvas.tokens.controlled
+const openBloodColorPicker = async (tokens) => {
   const firstToken = tokens[0]
-  if (!firstToken) return ui.notifications.warn("No tokens selected, can't open blood color picker.")
-  if (firstToken.actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)) {
-    return ui.notifications.warn("Automatic wounds are disabled on this token, can't open blood color picker.")
-  }
   const bloodColor = firstToken.actor.getFlag(MODULE_ID, 'bloodColor') || DEFAULT_BLOOD_COLOR
   const bloodColorInputValue = bloodColor.replace('0x', '#')
   const defaultColorNums = [
@@ -210,7 +205,7 @@ const openBloodColorPicker = async () => {
 const reapplyWoundsBasedOnCurrentHp = async (token) => {
   if (!token.actor) return
   await removeWoundsOnToken(token)
-  if (actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)) return
+  if (token.actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)) return
   const { currentHp, maxHp } = systemBasedHpFromActor(token.actor)
   if (currentHp === undefined || maxHp === undefined) return
   const damage = maxHp - currentHp
@@ -225,7 +220,7 @@ const reapplyWoundsBasedOnCurrentHp = async (token) => {
   }
 }
 
-const toggleDisableWoundsForActor = async (actor) => {
+const toggleDisableWounds = async (actor) => {
   const wasDisabled = actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)
   const disabled = !wasDisabled
   await actor.setFlag(MODULE_ID, FLAG_DISABLE_WOUNDS, disabled)
@@ -241,6 +236,40 @@ const toggleDisableWoundsForActor = async (actor) => {
   return disabled
 }
 
+const macroToggleAutoWoundsForActor = async () => {
+  if (canvas.tokens.controlled.length !== 1)
+    return ui.notifications.warn(`Please select exactly 1 actor's token.`)
+  const tok = canvas.tokens.controlled[0]
+  const realActor = game.actors.get(tok.actor.id)
+  const disabled = await TokenMagicAutomaticWounds.toggleDisableWounds(realActor)
+  ui.notifications.info(`Automatic Wounds: ${disabled ? 'DISABLED' : 'ENABLED'} for ${realActor.name}`)
+}
+
+const macroToggleAutoWoundsForToken = async () => {
+  if (canvas.tokens.controlled.length !== 1)
+    return ui.notifications.warn(`Please select exactly 1 token.`)
+  const tok = canvas.tokens.controlled[0]
+  const disabled = await TokenMagicAutomaticWounds.toggleDisableWounds(tok.actor)
+  ui.notifications.info(`Automatic Wounds: ${disabled ? 'DISABLED' : 'ENABLED'} for ${tok.name}`)
+}
+
+const macroReapplyWoundsBasedOnCurrentHp = async () => {
+  const tok = canvas.scene.controlled[0]
+  if (!tok)
+    return ui.notifications.warn(`You need to select a token for the Reapply Wounds Based On Current HP macro to work.`)
+  await TokenMagicAutomaticWounds.reapplyWoundsBasedOnCurrentHp(tok)
+}
+
+const macroOpenBloodColorPicker = async () => {
+  const tokens = canvas.tokens.controlled
+  const firstToken = tokens[0]
+  if (!firstToken) return ui.notifications.warn("No tokens selected, can't open blood color picker.")
+  if (firstToken.actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)) {
+    return ui.notifications.warn("Automatic wounds are disabled on this token, can't open blood color picker.")
+  }
+  await TokenMagicAutomaticWounds.openBloodColorPicker(tokens)
+}
+
 self.TokenMagicAutomaticWounds = {
   hookAutomaticWoundEffects,
   onPreUpdateActor,
@@ -250,5 +279,9 @@ self.TokenMagicAutomaticWounds = {
   setBloodColor,
   openBloodColorPicker,
   reapplyWoundsBasedOnCurrentHp,
-  toggleDisableWoundsForActor,
+  toggleDisableWounds,
+  macroToggleAutoWoundsForActor,
+  macroToggleAutoWoundsForToken,
+  macroReapplyWoundsBasedOnCurrentHp,
+  macroOpenBloodColorPicker,
 }

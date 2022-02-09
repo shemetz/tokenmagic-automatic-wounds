@@ -2,8 +2,7 @@
   "name": "tokenmagic-automatic-wounds",
   "title": "Token Magic FX - Automatic Wounds",
   "description": "Automatically apply a wound splatter visual effect to damaged tokens",
-  "author": "shem",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "minimumCoreVersion": "9",
   "compatibleCoreVersion": "9",
   "esmodules": [
@@ -29,5 +28,31 @@
   "download": "https://github.com/itamarcu/tokenmagic-automatic-wounds/archive/master.zip",
   "readme": "https://github.com/itamarcu/tokenmagic-automatic-wounds/blob/master/Readme.md",
   "bugs": "https://github.com/itamarcu/tokenmagic-automatic-wounds/issues",
-  "license": "https://github.com/itamarcu/tokenmagic-automatic-wounds/blob/master/License.txt"
+  "license": "https://github.com/itamarcu/tokenmagic-automatic-wounds/blob/master/License.txt",
+  "authors": [
+    {
+      "name": "shem",
+      "email": "itamarcu+foundry@gmail.com",
+      "discord": "shem#0226",
+      "reddit": "u/Shemetz"
+    }
+  ],
+  "manifestPlusVersion": "1.2.0",
+  "media": [
+    {
+      "type": "screenshot",
+      "url": "https://raw.githubusercontent.com/itamarcu/tokenmagic-automatic-wounds/master/metadata/Screenshot_1.png",
+      "caption": "Wounds Screenshot"
+    },
+    {
+      "type": "icon",
+      "url": "https://raw.githubusercontent.com/itamarcu/tokenmagic-automatic-wounds/master/metadata/icon.png",
+      "caption": "Wounds icon"
+    },
+    {
+      "type": "cover",
+      "url": "https://raw.githubusercontent.com/itamarcu/tokenmagic-automatic-wounds/master/metadata/Screenshot_1.png",
+      "caption": "Wounds Screenshot"
+    }
+  ]
 }
