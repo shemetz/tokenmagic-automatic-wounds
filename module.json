@@ -2,7 +2,7 @@
   "name": "tokenmagic-automatic-wounds",
   "title": "Token Magic FX - Automatic Wounds",
   "description": "Automatically apply a wound splatter visual effect to damaged tokens",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minimumCoreVersion": "9",
   "compatibleCoreVersion": "9",
   "esmodules": [
