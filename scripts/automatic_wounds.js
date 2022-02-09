@@ -1,6 +1,8 @@
-import { systemBasedGetHp, systemBasedUpdateHp } from './system-compatibility.js'
+import { systemBasedHpFromActor, systemBasedHpFromUpdate } from './system-compatibility.js'
 
 const MODULE_ID = 'tokenmagic-automatic-wounds'
+const FLAG_BLOOD_COLOR = 'blood-color'
+const FLAG_DISABLE_WOUNDS = 'enabled-for-token'
 
 const DAMAGE_SCALE_MULTIPLIER = 4.5
 const MINIMUM_CREATED_WOUND_SCALE = 0.08
@@ -24,9 +26,11 @@ export const hookAutomaticWoundEffects = () => {
 }
 
 const onPreUpdateActor = (actor, data) => {
-  const { currentHp, maxHp } = systemBasedGetHp(actor)
+  if (actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)) return
+  const { currentHp, maxHp } = systemBasedHpFromActor(actor)
+  if (currentHp === undefined || maxHp === undefined) return
   const oldHp = currentHp
-  const newHp = systemBasedUpdateHp(data)
+  const newHp = systemBasedHpFromUpdate(data)
   if (newHp === undefined) return
   const hpDiff = newHp - oldHp
   if (!hpDiff || newHp > maxHp) return
@@ -40,7 +44,7 @@ const onPreUpdateActor = (actor, data) => {
 const createWoundOnToken = async (token, damageFraction) => {
   const isImageCircular = true  // TODO add some config option or smart code to detect square tokens
   const woundScale = Math.max(MINIMUM_CREATED_WOUND_SCALE, damageFraction * DAMAGE_SCALE_MULTIPLIER)
-  const bloodColor = token.actor.getFlag(MODULE_ID, 'bloodColor')
+  const bloodColor = token.actor.getFlag(MODULE_ID, FLAG_BLOOD_COLOR)
     || DEFAULT_BLOOD_COLOR
   let anchorX, anchorY
   do {
@@ -112,6 +116,10 @@ const removeWoundsOnToken = async (token) => {
   return token._TMFXsetFlag(workingFlags)
 }
 
+function rgbToHex(r, g, b) {
+  return "0x" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
 const setBloodColor = async (token, color) => {
   if (!token.actor) return
 
@@ -123,22 +131,53 @@ const setBloodColor = async (token, color) => {
   let b = parseInt(color.substring(6, 8), 16)
   if (r < 0x60 && g < 0x60 && b < 0x60) {
     r = g = b = 0x60
+    ui.notifications.info('Blood color was too dark, so it was changed to gray.')
   }
-  const okayColor = `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
-  return token.actor.setFlag(MODULE_ID, 'bloodColor', okayColor)
+  const okayColor = rgbToHex(r, g, b)
+  await token.actor.setFlag(MODULE_ID, FLAG_BLOOD_COLOR, okayColor)
+
+  // change any existing wounds
+  const existingFlags = token.document.getFlag('tokenmagic', 'filters')
+  const numOfWounds = existingFlags?.filter(f => f.tmFilters.tmFilterId === AUTOMATIC_FILTER_ID)?.length
+  if (!numOfWounds) {
+    return
+  }
+  const workingFlags = existingFlags
+    .map(flag => {
+      if (!(flag.tmFilters && flag.tmFilters.tmFilterId === AUTOMATIC_FILTER_ID)) return flag
+      flag.tmFilters.tmParams.color = okayColor
+      flag.tmFilters.tmParams.updateId = randomID()
+      return flag
+    })
+  await token._TMFXsetFlag(workingFlags)
 }
 
-const openBloodColorPicker = async (token) => {
-  const bloodColor = token.actor.getFlag(MODULE_ID, 'bloodColor') || DEFAULT_BLOOD_COLOR
+const openBloodColorPicker = async () => {
+  const tokens = canvas.tokens.controlled
+  const firstToken = tokens[0]
+  if (!firstToken) return ui.notifications.warn("No tokens selected, can't open blood color picker.")
+  if (firstToken.actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)) {
+    return ui.notifications.warn("Automatic wounds are disabled on this token, can't open blood color picker.")
+  }
+  const bloodColor = firstToken.actor.getFlag(MODULE_ID, 'bloodColor') || DEFAULT_BLOOD_COLOR
   const bloodColorInputValue = bloodColor.replace('0x', '#')
+  const defaultColorNums = [
+    parseInt(DEFAULT_BLOOD_COLOR.substring(2, 4), 16),
+    parseInt(DEFAULT_BLOOD_COLOR.substring(4, 6), 16),
+    parseInt(DEFAULT_BLOOD_COLOR.substring(6, 8), 16)
+  ].join(', ')
   const color = await new Promise((resolve) => {
     new Dialog({
       title: 'Blood Color',
       content: `
 <div class="form-group">
+    <label>Selected tokens: ${tokens.map(t => t.name).join(', ')}</label>
+    <br/>
     <label>Choose blood color.  (Dark colors will be converted to gray, known bug).</label>
+    <br/>
+    <label>Default color: ${DEFAULT_BLOOD_COLOR} (${defaultColorNums})</label>
     <div>
-        <input type="color" value="${bloodColorInputValue}" />
+        <input type="color" value="${bloodColorInputValue}" style="height: 100px; width: 100px"/>
     </div>
 </div>
 `,
@@ -162,17 +201,44 @@ const openBloodColorPicker = async (token) => {
     }).render(true)
   })
   if (color) {
-    await setBloodColor(token, color)
+    for (const token of tokens) {
+      await setBloodColor(token, color)
+    }
   }
 }
 
 const reapplyWoundsBasedOnCurrentHp = async (token) => {
   if (!token.actor) return
-  removeWoundsOnToken(token)
-  const { currentHp, maxHp } = systemBasedGetHp(token.actor)
+  await removeWoundsOnToken(token)
+  if (actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)) return
+  const { currentHp, maxHp } = systemBasedHpFromActor(token.actor)
+  if (currentHp === undefined || maxHp === undefined) return
   const damage = maxHp - currentHp
-  if (damage < 0) return
-  const woundCount = Math.min(3, damage)
+  if (damage <= 0) return
+  const woundCount = Math.max(1, Math.log2(damage))
+  let leftoverDamage = damage
+  for (let i = 0; i < woundCount; i++) {
+    const appliedDamage = i === woundCount - 1 ? leftoverDamage : (Math.random() * leftoverDamage)
+    leftoverDamage -= appliedDamage
+    if (appliedDamage < MINIMUM_CREATED_WOUND_SCALE) continue
+    await createWoundOnToken(token, appliedDamage / maxHp)
+  }
+}
+
+const toggleDisableWoundsForActor = async (actor) => {
+  const wasDisabled = actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)
+  const disabled = !wasDisabled
+  await actor.setFlag(MODULE_ID, FLAG_DISABLE_WOUNDS, disabled)
+  if (disabled) {
+    for (const tok of actor.getActiveTokens()) {
+      await removeWoundsOnToken(tok)
+    }
+  } else {
+    for (const tok of actor.getActiveTokens()) {
+      await reapplyWoundsBasedOnCurrentHp(tok)
+    }
+  }
+  return disabled
 }
 
 self.TokenMagicAutomaticWounds = {
@@ -183,4 +249,6 @@ self.TokenMagicAutomaticWounds = {
   removeWoundsOnToken,
   setBloodColor,
   openBloodColorPicker,
+  reapplyWoundsBasedOnCurrentHp,
+  toggleDisableWoundsForActor,
 }

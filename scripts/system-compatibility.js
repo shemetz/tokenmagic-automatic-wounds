@@ -1,8 +1,8 @@
-export const systemBasedGetHp = (actor) => {
+export const systemBasedHpFromActor = (actor) => {
   if (game.system.id === 'pf2e') {
     return {
-      currentHp: actor.data.data.attributes.hp.value,
-      maxHp: actor.data.data.attributes.hp.max,
+      currentHp: actor.data.data.attributes.hp?.value,
+      maxHp: actor.data.data.attributes.hp?.max,
     }
   } else if (game.system.id === 'dnd5e') {
     return {
@@ -17,7 +17,7 @@ export const systemBasedGetHp = (actor) => {
     }
   }
 }
-export const systemBasedUpdateHp = (data) => {
+export const systemBasedHpFromUpdate = (data) => {
   if (game.system.id === 'pf2e') {
     // hpDiff = options.damageTaken
     return data.data?.attributes?.hp?.value

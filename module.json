@@ -10,7 +10,15 @@
     "scripts/tokenmagic-automatic-wounds.js",
     "scripts/hooks.js"
   ],
-  "packs": [],
+  "packs": [
+    {
+      "name": "tokenmagic-automatic-wounds-macros",
+      "label": "TokenMagic Automatic Wounds",
+      "module": "tokenmagic-automatic-wounds",
+      "path": "./packs/tokenmagic-automatic-wounds-macros.db",
+      "type": "Macro"
+    }
+  ],
   "dependencies": [
     {
       "name": "tokenmagic"
