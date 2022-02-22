@@ -13,7 +13,7 @@ To install, browse for it in the module browser, or [directly copy the manifest 
 
 ![](metadata/Screenshot_1.png)
 
-![](https://pipe.miroware.io/60781d17a333fb12a3acb21e/maybe%20permanent/automatic_wounds.webp)
+![](https://file.garden/YHgdF6Mz-xKjrLIe/maybe%20permanent/automatic_wounds.webp)
 
 # Features
 
