@@ -5,8 +5,7 @@
 ![GitHub All Releases](https://img.shields.io/github/downloads/itamarcu/tokenmagic-automatic-wounds/total?style=for-the-badge&label=Downloads+total)  
 ![Latest Supported Foundry Version](https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/itamarcu/tokenmagic-automatic-wounds/raw/master/module.json)
 
-Will automatically apply TokenMagic visual effects of wounds to tokens based on the number of wounds on the token.
-
+Will automatically apply TokenMagic visual effects of wounds to tokens based on the number of wounds on the token. 
 Healing will reduce wounds.
 
 To install, browse for it in the module browser, or [directly copy the manifest link for the latest release](https://github.com/itamarcu/tokenmagic-automatic-wounds/releases/latest/download/module.json).
