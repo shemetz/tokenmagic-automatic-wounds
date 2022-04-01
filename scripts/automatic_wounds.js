@@ -30,7 +30,7 @@ const onPreUpdateActor = (actor, data) => {
   const { currentHp, maxHp } = systemBasedHpFromActor(actor)
   if (currentHp === undefined || maxHp === undefined) return
   const oldHp = currentHp
-  const newHp = systemBasedHpFromUpdate(data)
+  const newHp = systemBasedHpFromUpdate(actor, data)
   if (newHp === undefined) return
   const hpDiff = newHp - oldHp
   if (!hpDiff || newHp > maxHp) return

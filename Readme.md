@@ -5,10 +5,12 @@
 ![GitHub All Releases](https://img.shields.io/github/downloads/itamarcu/tokenmagic-automatic-wounds/total?style=for-the-badge&label=Downloads+total)  
 ![Latest Supported Foundry Version](https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/itamarcu/tokenmagic-automatic-wounds/raw/master/module.json)
 
-Will automatically apply TokenMagic visual effects of wounds to tokens based on the number of wounds on the token. 
+Will automatically apply TokenMagic visual effects of wounds to tokens based on the number of wounds on the token.
 Healing will reduce wounds.
 
-To install, browse for it in the module browser, or [directly copy the manifest link for the latest release](https://github.com/itamarcu/tokenmagic-automatic-wounds/releases/latest/download/module.json).
+To install, browse for it in the module browser,
+or [directly copy the manifest link for the latest release](https://github.com/itamarcu/tokenmagic-automatic-wounds/releases/latest/download/module.json)
+.
 
 ![](metadata/Screenshot_1.png)
 
@@ -17,12 +19,20 @@ To install, browse for it in the module browser, or [directly copy the manifest 
 # Features
 
 - Whenever an actor is dealt damage, a "repeatable splash wound" special effect will be applied to the token, making it
-look like an open wound has appeared.
+  look like an open wound has appeared.
 - Wounds will appear in a random circle position on the token, with size depending on the amount of damage dealt.
 - Healing applied to the actor will make existing wounds shrink or disappear, depending on amou of healing.
 - (Configurable) Wound colors is red by default.
 - (Configurable) All wounds will disappear when a token is fully healed.
 
+# Supported systems
+
+- D&D 5e (dnd5e)
+- Pathfinder 2e (pf2e)
+- Savage Worlds Adventure Edition (SWADE)
+- HeXXen 1733 (hexxen-1733)
+
+More can be added easily by request / PR!
 
 # Macros (in "TokenMagic Automatic Wounds" compendium pack)
 
@@ -43,5 +53,5 @@ Will disable this module's functionality for a specific token, and remove existi
 
 #### Toggle Auto-Wounds For Actor
 
-Same as the above, except it will apply to the original actor even if the token is not linked.  This is useful for
+Same as the above, except it will apply to the original actor even if the token is not linked. This is useful for
 monsters, which may default to unlinked.
