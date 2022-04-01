@@ -236,28 +236,55 @@ const toggleDisableWounds = async (actor) => {
   return disabled
 }
 
-const macroToggleAutoWoundsForActor = async () => {
-  if (canvas.tokens.controlled.length !== 1)
-    return ui.notifications.warn(`Please select exactly 1 actor's token.`)
-  const tok = canvas.tokens.controlled[0]
-  const realActor = game.actors.get(tok.actor.id)
-  const disabled = await TokenMagicAutomaticWounds.toggleDisableWounds(realActor)
-  ui.notifications.info(`Automatic Wounds: ${disabled ? 'DISABLED' : 'ENABLED'} for ${realActor.name}`)
+const macroToggleAutoWoundsForActors = async () => {
+  const tokens = canvas.tokens.controlled
+  const disabledNames = []
+  const enabledNames = []
+  for (const tok of tokens) {
+    const realActor = game.actors.get(tok.actor.id)
+    const disabled = await TokenMagicAutomaticWounds.toggleDisableWounds(realActor)
+    if (disabled) {
+      disabledNames.push(tok.name)
+    } else {
+      enabledNames.push(tok.name)
+    }
+  }
+  if (disabledNames.length > 0) {
+    ui.notifications.info(`Automatic Wounds: disabled for ${disabledNames.join(', ')} (game actor)`)
+  }
+  if (enabledNames.length > 0) {
+    ui.notifications.info(`Automatic Wounds: enabled for ${enabledNames.join(', ')} (game actor)`)
+  }
 }
 
-const macroToggleAutoWoundsForToken = async () => {
-  if (canvas.tokens.controlled.length !== 1)
-    return ui.notifications.warn(`Please select exactly 1 token.`)
-  const tok = canvas.tokens.controlled[0]
-  const disabled = await TokenMagicAutomaticWounds.toggleDisableWounds(tok.actor)
-  ui.notifications.info(`Automatic Wounds: ${disabled ? 'DISABLED' : 'ENABLED'} for ${tok.name}`)
+const macroToggleAutoWoundsForTokens = async () => {
+  const tokens = canvas.tokens.controlled
+  const disabledNames = []
+  const enabledNames = []
+  for (const tok of tokens) {
+    const tokenActor = tok.actor
+    const disabled = await TokenMagicAutomaticWounds.toggleDisableWounds(tokenActor)
+    if (disabled) {
+      disabledNames.push(tok.name)
+    } else {
+      enabledNames.push(tok.name)
+    }
+  }
+  if (disabledNames.length > 0) {
+    ui.notifications.info(`Automatic Wounds: disabled for ${disabledNames.join(', ')} (token actor)`)
+  }
+  if (enabledNames.length > 0) {
+    ui.notifications.info(`Automatic Wounds: enabled for ${enabledNames.join(', ')} (token actor)`)
+  }
 }
 
 const macroReapplyWoundsBasedOnCurrentHp = async () => {
-  const tok = canvas.tokens.controlled[0]
-  if (!tok)
-    return ui.notifications.warn(`You need to select a token for the Reapply Wounds Based On Current HP macro to work.`)
-  await TokenMagicAutomaticWounds.reapplyWoundsBasedOnCurrentHp(tok)
+  const tokens = canvas.tokens.controlled
+  if (!tokens)
+    return ui.notifications.warn(`You need to select token(s) for the Reapply Wounds Based On Current HP macro to work.`)
+  for (const tok of tokens) {
+    await TokenMagicAutomaticWounds.reapplyWoundsBasedOnCurrentHp(tok)
+  }
 }
 
 const macroOpenBloodColorPicker = async () => {
@@ -280,8 +307,12 @@ self.TokenMagicAutomaticWounds = {
   openBloodColorPicker,
   reapplyWoundsBasedOnCurrentHp,
   toggleDisableWounds,
-  macroToggleAutoWoundsForActor,
-  macroToggleAutoWoundsForToken,
+  macroToggleAutoWoundsForActors,
+  /** @deprecated */
+  macroToggleAutoWoundsForActor: macroToggleAutoWoundsForActors,
+  macroToggleAutoWoundsForTokens,
+  /** @deprecated */
+  macroToggleAutoWoundsForToken: macroToggleAutoWoundsForTokens,
   macroReapplyWoundsBasedOnCurrentHp,
   macroOpenBloodColorPicker,
 }
