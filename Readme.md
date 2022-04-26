@@ -31,6 +31,7 @@ or [directly copy the manifest link for the latest release](https://github.com/i
 - Pathfinder 2e (pf2e)
 - Savage Worlds Adventure Edition (SWADE)
 - HeXXen 1733 (hexxen-1733)
+- Warhammer Fantasy Roleplay 4e (wfrp4e)
 
 More can be added easily by request / PR!
 

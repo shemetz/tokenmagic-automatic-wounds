@@ -19,6 +19,11 @@ export const systemBasedHpFromActor = (actor) => {
       currentHp: actor.data.data.health.value,
       maxHp: actor.data.data.health.max,
     }
+  } else if (game.system.id === 'wfrp4e') {
+    return {
+      currentHp: actor.data.data.status.wounds.value,
+      maxHp: actor.data.data.status.wounds.max,
+    }
   } else {
     // not a supported system
     return {
@@ -37,6 +42,8 @@ export const systemBasedHpFromUpdate = (actor, data) => {
     return actor?.data?.data?.wounds?.max - data.data?.wounds?.value
   } else if (game.system.id === 'hexxen-1733') {
     return data.data?.health?.value
+  } else if (game.system.id === 'wfrp4e') {
+    return data.data?.status?.wounds?.value
   } else {
     // not a supported system
     return undefined
