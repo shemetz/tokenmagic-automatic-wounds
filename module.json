@@ -1,10 +1,11 @@
 {
+  "id": "tokenmagic-automatic-wounds",
   "name": "tokenmagic-automatic-wounds",
   "title": "Token Magic FX - Automatic Wounds",
   "description": "Automatically apply a wound splatter visual effect to damaged tokens",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "9",
+  "compatibleCoreVersion": "10",
   "esmodules": [
     "scripts/tokenmagic-automatic-wounds.js",
     "scripts/hooks.js"
@@ -23,17 +24,26 @@
       "name": "tokenmagic"
     }
   ],
-  "url": "https://github.com/itamarcu/tokenmagic-automatic-wounds",
-  "manifest": "https://github.com/itamarcu/tokenmagic-automatic-wounds/raw/master/module.json",
-  "download": "https://github.com/itamarcu/tokenmagic-automatic-wounds/archive/master.zip",
-  "readme": "https://github.com/itamarcu/tokenmagic-automatic-wounds/blob/master/Readme.md",
-  "bugs": "https://github.com/itamarcu/tokenmagic-automatic-wounds/issues",
-  "license": "https://github.com/itamarcu/tokenmagic-automatic-wounds/blob/master/License.txt",
+  "relationships": {
+    "requires": [
+      {
+        "id": "tokenmagic",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/Feu-Secret/Tokenmagic/master/tokenmagic/module.json"
+      }
+    ]
+  },
+  "url": "https://github.com/shemetz/tokenmagic-automatic-wounds",
+  "manifest": "https://github.com/shemetz/tokenmagic-automatic-wounds/raw/master/module.json",
+  "download": "https://github.com/shemetz/tokenmagic-automatic-wounds/archive/master.zip",
+  "readme": "https://github.com/shemetz/tokenmagic-automatic-wounds/blob/master/Readme.md",
+  "bugs": "https://github.com/shemetz/tokenmagic-automatic-wounds/issues",
+  "license": "https://github.com/shemetz/tokenmagic-automatic-wounds/blob/master/License.txt",
   "authors": [
     {
       "name": "shem",
       "email": "itamarcu+foundry@gmail.com",
-      "discord": "shem#0226",
+      "discord": "shemetz#0226",
       "reddit": "u/Shemetz"
     }
   ],
@@ -41,17 +51,17 @@
   "media": [
     {
       "type": "screenshot",
-      "url": "https://raw.githubusercontent.com/itamarcu/tokenmagic-automatic-wounds/master/metadata/Screenshot_1.png",
+      "url": "https://raw.githubusercontent.com/shemetz/tokenmagic-automatic-wounds/master/metadata/Screenshot_1.png",
       "caption": "Wounds Screenshot"
     },
     {
       "type": "icon",
-      "url": "https://raw.githubusercontent.com/itamarcu/tokenmagic-automatic-wounds/master/metadata/icon.png",
+      "url": "https://raw.githubusercontent.com/shemetz/tokenmagic-automatic-wounds/master/metadata/icon.png",
       "caption": "Wounds icon"
     },
     {
       "type": "cover",
-      "url": "https://raw.githubusercontent.com/itamarcu/tokenmagic-automatic-wounds/master/metadata/Screenshot_1.png",
+      "url": "https://raw.githubusercontent.com/shemetz/tokenmagic-automatic-wounds/master/metadata/Screenshot_1.png",
       "caption": "Wounds Screenshot"
     }
   ]
