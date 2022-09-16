@@ -4,8 +4,12 @@
   "title": "Token Magic FX - Automatic Wounds",
   "description": "Automatically apply a wound splatter visual effect to damaged tokens",
   "version": "1.0.6",
-  "minimumCoreVersion": "9",
+  "minimumCoreVersion": "10",
   "compatibleCoreVersion": "10",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10"
+  },
   "esmodules": [
     "scripts/tokenmagic-automatic-wounds.js",
     "scripts/hooks.js"
