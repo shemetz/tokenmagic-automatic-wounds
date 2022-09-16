@@ -308,11 +308,7 @@ self.TokenMagicAutomaticWounds = {
   reapplyWoundsBasedOnCurrentHp,
   toggleDisableWounds,
   macroToggleAutoWoundsForActors,
-  /** @deprecated */
-  macroToggleAutoWoundsForActor: macroToggleAutoWoundsForActors,
   macroToggleAutoWoundsForTokens,
-  /** @deprecated */
-  macroToggleAutoWoundsForToken: macroToggleAutoWoundsForTokens,
   macroReapplyWoundsBasedOnCurrentHp,
   macroOpenBloodColorPicker,
 }
