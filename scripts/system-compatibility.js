@@ -9,6 +9,11 @@ export const systemBasedHpFromActor = (actor) => {
       currentHp: actor.system.attributes.hp.value,
       maxHp: actor.system.attributes.hp.max,
     }
+  } else if (game.system.id === 'dungeonworld') {
+    return {
+      currentHp: actor.system.attributes.hp.value,
+      maxHp: actor.system.attributes.hp.max,
+    }
   } else if (game.system.id === 'swade') {
     return {
       currentHp: actor.system.wounds.max - actor.system.wounds.value,
@@ -37,6 +42,8 @@ export const systemBasedHpFromUpdate = (actor, data) => {
     // hpDiff = options.damageTaken
     return data.system?.attributes?.hp?.value
   } else if (game.system.id === 'dnd5e') {
+    return data.system?.attributes?.hp?.value
+  } else if (game.system.id === 'dungeonworld') {
     return data.system?.attributes?.hp?.value
   } else if (game.system.id === 'swade') {
     return actor?.system?.wounds?.max - data.system?.wounds?.value
