@@ -14,6 +14,11 @@ export const systemBasedHpFromActor = (actor) => {
       currentHp: actor.system.attributes.hp.value,
       maxHp: actor.system.attributes.hp.max,
     }
+  } else if (game.system.id === 'cyberpunk-red-core') {
+    return {
+      currentHp: actor.system.derivedStats.hp.max - actor.system.derivedStats.hp.value,
+      maxHp: actor.system.derivedStats.hp.max,
+    }
   } else if (game.system.id === 'swade') {
     return {
       currentHp: actor.system.wounds.max - actor.system.wounds.value,
@@ -45,6 +50,8 @@ export const systemBasedHpFromUpdate = (actor, data) => {
     return data.system?.attributes?.hp?.value
   } else if (game.system.id === 'dungeonworld') {
     return data.system?.attributes?.hp?.value
+  } else if (game.system.id === 'cyberpunk-red-core') {
+    return data.system?.derivedStats?.hp?.value
   } else if (game.system.id === 'swade') {
     return actor?.system?.wounds?.max - data.system?.wounds?.value
   } else if (game.system.id === 'hexxen-1733') {

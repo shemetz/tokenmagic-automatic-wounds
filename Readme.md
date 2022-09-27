@@ -27,12 +27,13 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 
 # Supported systems
 
-- D&D 5e (dnd5e)
 - Pathfinder 2e (pf2e)
+- D&D 5e (dnd5e)
+- Dungeon World (dungeonworld)
+- Cyberpunk RED (cyberpunk-red-core)
 - Savage Worlds Adventure Edition (SWADE)
 - HeXXen 1733 (hexxen-1733)
 - Warhammer Fantasy Roleplay 4e (wfrp4e)
-- Dungeon World
 
 More can be added easily by request / PR!
 
