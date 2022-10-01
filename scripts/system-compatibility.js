@@ -16,7 +16,7 @@ export const systemBasedHpFromActor = (actor) => {
     }
   } else if (game.system.id === 'cyberpunk-red-core') {
     return {
-      currentHp: actor.system.derivedStats.hp.max - actor.system.derivedStats.hp.value,
+      currentHp: actor.system.derivedStats.hp.value,
       maxHp: actor.system.derivedStats.hp.max,
     }
   } else if (game.system.id === 'swade') {
