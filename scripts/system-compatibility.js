@@ -39,6 +39,11 @@ export const systemBasedHpFromActor = (actor) => {
       currentHp: actor.system.header.health.value,
       maxHp: actor.system.header.health.max,
     }
+  } else if (game.system.id === 'pf1') {
+    return {
+      currentHp: actor.system.attributes.hp.value,
+      maxHp: actor.system.attributes.hp.max,
+    }
   } else {
     // not a supported system
     return {
