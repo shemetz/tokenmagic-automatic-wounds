@@ -1,12 +1,11 @@
 {
   "id": "tokenmagic-automatic-wounds",
-  "name": "tokenmagic-automatic-wounds",
   "title": "Token Magic FX - Automatic Wounds",
   "description": "Automatically apply a wound splatter visual effect to damaged tokens",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "compatibility": {
     "minimum": "10",
-    "verified": "10"
+    "verified": "11"
   },
   "esmodules": [
     "scripts/tokenmagic-automatic-wounds.js",
@@ -39,7 +38,7 @@
     {
       "name": "shemetz",
       "email": "itamarcu+foundry@gmail.com",
-      "discord": "shemetz#0226",
+      "discord": "shemetz",
       "reddit": "u/Shemetz"
     }
   ],
