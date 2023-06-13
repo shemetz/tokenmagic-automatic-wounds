@@ -1,0 +1,24 @@
+{
+  "_id": "7zoxtWJtuX9zRFid",
+  "name": "Toggle Auto-Wounds For Token",
+  "type": "script",
+  "author": "1juviUvXUOch1cLb",
+  "img": "icons/skills/toxins/poison-bottle-open-blood-red.webp",
+  "scope": "global",
+  "command": "TokenMagicAutomaticWounds.macroToggleAutoWoundsForTokens()",
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0,
+    "1juviUvXUOch1cLb": 3
+  },
+  "flags": {
+    "advanced-macros": {
+      "runAsGM": false
+    },
+    "core": {
+      "sourceId": "Macro.UdRouXwJcXcFpozU"
+    }
+  },
+  "_key": "!macros!7zoxtWJtuX9zRFid"
+}
