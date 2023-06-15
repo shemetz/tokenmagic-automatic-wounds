@@ -3,7 +3,7 @@
   "name": "Change Blood Color",
   "type": "script",
   "author": "1juviUvXUOch1cLb",
-  "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
+  "img": "icons/tools/hand/brush-paint-pink.webp",
   "scope": "global",
   "command": "TokenMagicAutomaticWounds.macroOpenBloodColorPicker()",
   "folder": null,

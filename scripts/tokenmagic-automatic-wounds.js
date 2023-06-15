@@ -1,4 +1,5 @@
 import { systemBasedHpFromActor, systemBasedHpFromUpdate } from './system-compatibility.js'
+import { getSplatterBloodColor } from './module-compatibility.js'
 
 const MODULE_ID = 'tokenmagic-automatic-wounds'
 const FLAG_BLOOD_COLOR = 'blood-color'
@@ -45,6 +46,7 @@ const createWoundOnToken = async (token, damageFraction) => {
   const isImageCircular = true  // TODO add some config option or smart code to detect square tokens
   const woundScale = Math.max(MINIMUM_CREATED_WOUND_SCALE, damageFraction * DAMAGE_SCALE_MULTIPLIER)
   const bloodColor = token.actor.getFlag(MODULE_ID, FLAG_BLOOD_COLOR)
+    || getSplatterBloodColor(token)
     || DEFAULT_BLOOD_COLOR
   let anchorX, anchorY
   do {
@@ -56,24 +58,25 @@ const createWoundOnToken = async (token, damageFraction) => {
   anchorX = 0.5 + anchorRadius * anchorX
   anchorY = 0.5 + anchorRadius * anchorY
   const params =
-    [{
-      filterType: 'splash',
-      filterId: AUTOMATIC_FILTER_ID,
-      rank: 5,
-      color: bloodColor,
-      padding: 0,
-      time: 1,
-      seed: Math.random(),
-      splashFactor: 1,
-      spread: woundScale,
-      blend: 1,
-      dimX: 1,
-      dimY: 1,
-      cut: false,
-      textureAlphaBlend: true,
-      anchorX,
-      anchorY,
-    }]
+    [
+      {
+        filterType: 'splash',
+        filterId: AUTOMATIC_FILTER_ID,
+        rank: 5,
+        color: bloodColor,
+        padding: 0,
+        time: 1,
+        seed: Math.random(),
+        splashFactor: 1,
+        spread: woundScale,
+        blend: 1,
+        dimX: 1,
+        dimY: 1,
+        cut: false,
+        textureAlphaBlend: true,
+        anchorX,
+        anchorY,
+      }]
   return TokenMagic.addFilters(token, params)
 }
 
@@ -120,7 +123,8 @@ function rgbToHex (r, g, b) {
   return '0x' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
 
-const setBloodColor = async (token, color) => {
+const setBloodColor = async (token, newColor) => {
+  const color = newColor === null ? DEFAULT_BLOOD_COLOR : newColor
   if (!token.actor) return
 
   // get rgb of hex color
@@ -132,7 +136,11 @@ const setBloodColor = async (token, color) => {
     r = g = b = 0x01
   }
   const okayColor = rgbToHex(r, g, b)
-  await token.actor.setFlag(MODULE_ID, FLAG_BLOOD_COLOR, okayColor)
+  if (newColor === null) {
+    await token.actor.unsetFlag(MODULE_ID, FLAG_BLOOD_COLOR)
+  } else {
+    await token.actor.setFlag(MODULE_ID, FLAG_BLOOD_COLOR, okayColor)
+  }
 
   // change any existing wounds
   const existingFlags = token.document.getFlag('tokenmagic', 'filters')
@@ -152,48 +160,69 @@ const setBloodColor = async (token, color) => {
 
 const openBloodColorPicker = async (tokens) => {
   const firstToken = tokens[0]
-  const bloodColor = firstToken.actor.getFlag(MODULE_ID, FLAG_BLOOD_COLOR) || DEFAULT_BLOOD_COLOR
-  const bloodColorInputValue = bloodColor.replace('0x', '#')
-  const defaultColorNums = [
-    parseInt(DEFAULT_BLOOD_COLOR.substring(2, 4), 16),
-    parseInt(DEFAULT_BLOOD_COLOR.substring(4, 6), 16),
-    parseInt(DEFAULT_BLOOD_COLOR.substring(6, 8), 16)
-  ].join(', ')
+  const currentBloodColor = firstToken.actor.getFlag(MODULE_ID, FLAG_BLOOD_COLOR)
+  const splatterBloodColor = getSplatterBloodColor(firstToken)
+  const inputBloodColor = currentBloodColor || splatterBloodColor || DEFAULT_BLOOD_COLOR
+  const bloodColorInputValue = inputBloodColor.replace('0x', '#')
   const color = await new Promise((resolve) => {
     new Dialog({
-      title: 'Blood Color',
+      title: 'Change Blood Color',
       content: `
 <div class="form-group">
     <label>Selected tokens: ${tokens.map(t => t.name).join(', ')}</label>
-    <br/>
-    <label>Choose blood color.</label>
-    <br/>
-    <label>Default color: ${DEFAULT_BLOOD_COLOR} (${defaultColorNums})</label>
-    <div>
+    <br/>`
+        + (
+          (splatterBloodColor && [splatterBloodColor, DEFAULT_BLOOD_COLOR].includes(inputBloodColor)) ?
+            `<label>Currently defaulting to Splatter color: ${splatterBloodColor}</label>` :
+            splatterBloodColor ?
+              `<label>Splatter color: ${splatterBloodColor}</label>` :
+              inputBloodColor === DEFAULT_BLOOD_COLOR ?
+                `<label>Currently defaulting to red color: ${DEFAULT_BLOOD_COLOR}</label>` :
+                ``
+        ) +
+        `   <div>
         <input type="color" value="${bloodColorInputValue}" style="height: 100px; width: 100px"/>
     </div>
 </div>
 `,
       buttons: {
-        ok: {
-          icon: '<i class="fas fa-check"></i>',
-          label: 'OK',
+        change: {
+          icon: '<i class="fas fa-fa-droplet"></i>',
+          label: 'Set new color',
           callback: (html) => {
             const color = html.find('input').val().replace('#', '0x')
             resolve(color)
           },
         },
+        ...((inputBloodColor !== DEFAULT_BLOOD_COLOR && splatterBloodColor === undefined) && {
+          revertToDefault: {
+            icon: '<i class="fas fa-undo"></i>',
+            label: `Reset to default: ${DEFAULT_BLOOD_COLOR} (red)`,
+            callback: () => {
+              resolve(null)
+            },
+          },
+        }),
+        ...((inputBloodColor !== splatterBloodColor && splatterBloodColor !== undefined) && {
+          splatter: {
+            icon: '<i class="fas fa-undo"></i>',
+            label: `Reset to Splatter: ${splatterBloodColor}`,
+            callback: () => {
+              resolve(null)
+            },
+          },
+        }),
         cancel: {
           icon: '<i class="fas fa-times"></i>',
           label: 'Cancel',
           callback: () => {
-            resolve(null)
+            resolve(undefined)
           },
         },
       },
     }).render(true)
   })
-  if (color) {
+  if (color !== undefined) {
     for (const token of tokens) {
       await setBloodColor(token, color)
     }
@@ -279,7 +308,8 @@ const macroToggleAutoWoundsForTokens = async () => {
 const macroReapplyWoundsBasedOnCurrentHp = async () => {
   const tokens = canvas.tokens.controlled
   if (!tokens)
-    return ui.notifications.warn(`You need to select token(s) for the Reapply Wounds Based On Current HP macro to work.`)
+    return ui.notifications.warn(
+      `You need to select token(s) for the Reapply Wounds Based On Current HP macro to work.`)
   for (const tok of tokens) {
     await TokenMagicAutomaticWounds.reapplyWoundsBasedOnCurrentHp(tok)
   }
