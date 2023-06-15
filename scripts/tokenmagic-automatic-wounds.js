@@ -44,7 +44,7 @@ const onPreUpdateActor = (actor, data) => {
 const createWoundOnToken = async (token, damageFraction) => {
   const isImageCircular = true  // TODO add some config option or smart code to detect square tokens
   const woundScale = Math.max(MINIMUM_CREATED_WOUND_SCALE, damageFraction * DAMAGE_SCALE_MULTIPLIER)
-  const bloodColor = token.actor.getFlag(MODULE_ID, FLAG_BLOOD_COLOR) || token.document.getFlag("splatter", "bloodColor")
+  const bloodColor = token.actor.getFlag(MODULE_ID, FLAG_BLOOD_COLOR)
     || DEFAULT_BLOOD_COLOR
   let anchorX, anchorY
   do {
