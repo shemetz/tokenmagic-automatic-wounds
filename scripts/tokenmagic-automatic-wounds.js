@@ -55,7 +55,7 @@ const createWoundOnToken = async (token, damageFraction) => {
   // convert values from [-1, +1] to [0, 1]
   anchorX = 0.5 + anchorRadius * anchorX
   anchorY = 0.5 + anchorRadius * anchorY
-  let params =
+  const params =
     [{
       filterType: 'splash',
       filterId: AUTOMATIC_FILTER_ID,
@@ -123,15 +123,13 @@ function rgbToHex (r, g, b) {
 const setBloodColor = async (token, color) => {
   if (!token.actor) return
 
-  // TODO - remove color override after bug is solved: https://github.com/Feu-Secret/Tokenmagic/issues/184
-  // if all color components are below 0x60 bad stuff happens
   // get rgb of hex color
   let r = parseInt(color.substring(2, 4), 16)
   let g = parseInt(color.substring(4, 6), 16)
   let b = parseInt(color.substring(6, 8), 16)
-  if (r < 0x60 && g < 0x60 && b < 0x60) {
-    r = g = b = 0x60
-    ui.notifications.info('Blood color was too dark, so it was changed to gray.')
+  // if all color components are 0, it doesn't work
+  if (r + g + b === 0) {
+    r = g = b = 0x01
   }
   const okayColor = rgbToHex(r, g, b)
   await token.actor.setFlag(MODULE_ID, FLAG_BLOOD_COLOR, okayColor)
@@ -168,7 +166,7 @@ const openBloodColorPicker = async (tokens) => {
 <div class="form-group">
     <label>Selected tokens: ${tokens.map(t => t.name).join(', ')}</label>
     <br/>
-    <label>Choose blood color.  (Dark colors will be converted to gray, known bug).</label>
+    <label>Choose blood color.</label>
     <br/>
     <label>Default color: ${DEFAULT_BLOOD_COLOR} (${defaultColorNums})</label>
     <div>
