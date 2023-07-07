@@ -29,12 +29,12 @@ export const systemBasedHpFromActor = (actor) => {
       currentHp: actor.system.health.value,
       maxHp: actor.system.health.max,
     }
-  } else if (game.system.id === 'wfrp4e') {
+  } else if (game.system.id === 'wfrp4e' && actor.type !== 'vehicle') {
     return {
       currentHp: actor.system.status.wounds.value,
       maxHp: actor.system.status.wounds.max,
     }
-  } else if (game.system.id === 'alienrpg') {
+  } else if (game.system.id === 'alienrpg' && actor.type !== 'spacecraft' && actor.type !== 'vehicles') {
     return {
       currentHp: actor.system.header.health.value,
       maxHp: actor.system.header.health.max,
