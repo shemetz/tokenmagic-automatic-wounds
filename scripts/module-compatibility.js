@@ -1,5 +1,5 @@
 export const getSplatterBloodColor = (token) => {
-  if (!game.modules.get('splatter')) return undefined
+  if (!game.modules.get('splatter')?.active) return undefined
 
   // note:  I had to copy and edit some code from the splatter module, because the BloodSplatter class is not exported
 
