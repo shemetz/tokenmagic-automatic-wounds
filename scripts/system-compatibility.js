@@ -44,6 +44,11 @@ export const systemBasedHpFromActor = (actor) => {
       currentHp: actor.system.attributes.hp.value,
       maxHp: actor.system.attributes.hp.max,
     }
+  } else if (game.system.id === 'tormenta20') {
+    return {
+      currentHp: actor.system.attributes.pv.value,
+      maxHp: actor.system.attributes.pv.max,
+    }
   } else {
     // not a supported system
     return {
@@ -70,6 +75,10 @@ export const systemBasedHpFromUpdate = (actor, data) => {
     return data.system?.status?.wounds?.value
   } else if (game.system.id === 'alienrpg') {
     return data.system?.header?.health?.value
+  } else if (game.system.id === 'pf1') {
+    return data.system?.attributes?.hp?.value
+  } else if (game.system.id === 'tormenta20') {
+    return data.system?.attributes?.pv?.value
   } else {
     // not a supported system
     return undefined
