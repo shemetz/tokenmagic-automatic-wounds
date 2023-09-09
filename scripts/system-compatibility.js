@@ -1,86 +1,98 @@
-export const systemBasedHpFromActor = (actor) => {
+const systemBasedHpKeys = (actor) => {
   if (game.system.id === 'pf2e') {
     return {
-      currentHp: actor.system.attributes.hp?.value,
-      maxHp: actor.system.attributes.hp?.max,
+      hpValue: 'system.attributes.hp.value',
+      hpMax: 'system.attributes.hp.max',
+      zeroIsBad: true,
     }
   } else if (game.system.id === 'dnd5e') {
     return {
-      currentHp: actor.system.attributes.hp.value,
-      maxHp: actor.system.attributes.hp.max,
+      hpValue: 'system.attributes.hp.value',
+      hpMax: 'system.attributes.hp.max',
+      zeroIsBad: true,
     }
   } else if (game.system.id === 'dungeonworld') {
     return {
-      currentHp: actor.system.attributes.hp.value,
-      maxHp: actor.system.attributes.hp.max,
+      hpValue: 'system.attributes.hp.value',
+      hpMax: 'system.attributes.hp.max',
+      zeroIsBad: true,
     }
   } else if (game.system.id === 'cyberpunk-red-core') {
     return {
-      currentHp: actor.system.derivedStats.hp.value,
-      maxHp: actor.system.derivedStats.hp.max,
+      hpValue: 'system.derivedStats.hp.value',
+      hpMax: 'system.derivedStats.hp.max',
+      zeroIsBad: true,
     }
   } else if (game.system.id === 'swade') {
     return {
-      currentHp: actor.system.wounds.max - actor.system.wounds.value,
-      maxHp: actor.system.wounds.max,
+      hpValue: 'actor.system.wounds.value',
+      hpMax: 'system.wounds.max',
+      zeroIsBad: false,
     }
   } else if (game.system.id === 'hexxen-1733') {
     return {
-      currentHp: actor.system.health.value,
-      maxHp: actor.system.health.max,
+      hpValue: 'system.health.value',
+      hpMax: 'system.health.max',
+      zeroIsBad: true,
     }
-  } else if (game.system.id === 'wfrp4e' && actor.type !== 'vehicle') {
-    return {
-      currentHp: actor.system.status.wounds.value,
-      maxHp: actor.system.status.wounds.max,
-    }
-  } else if (game.system.id === 'alienrpg' && actor.type !== 'spacecraft' && actor.type !== 'vehicles') {
-    return {
-      currentHp: actor.system.header.health.value,
-      maxHp: actor.system.header.health.max,
-    }
-  } else if (game.system.id === 'pf1') {
-    return {
-      currentHp: actor.system.attributes.hp.value,
-      maxHp: actor.system.attributes.hp.max,
-    }
-  } else if (game.system.id === 'tormenta20') {
-    return {
-      currentHp: actor.system.attributes.pv.value,
-      maxHp: actor.system.attributes.pv.max,
-    }
-  } else {
-    // not a supported system
-    return {
-      currentHp: undefined,
-      maxHp: undefined
-    }
-  }
-}
-export const systemBasedHpFromUpdate = (actor, data) => {
-  if (game.system.id === 'pf2e') {
-    // hpDiff = options.damageTaken
-    return data.system?.attributes?.hp?.value
-  } else if (game.system.id === 'dnd5e') {
-    return data.system?.attributes?.hp?.value
-  } else if (game.system.id === 'dungeonworld') {
-    return data.system?.attributes?.hp?.value
-  } else if (game.system.id === 'cyberpunk-red-core') {
-    return data.system?.derivedStats?.hp?.value
-  } else if (game.system.id === 'swade') {
-    return actor?.system?.wounds?.max - data.system?.wounds?.value
-  } else if (game.system.id === 'hexxen-1733') {
-    return data.system?.health?.value
   } else if (game.system.id === 'wfrp4e') {
-    return data.system?.status?.wounds?.value
+    if (actor.type !== 'vehicle')
+      return {
+        hpValue: 'system.status.wounds.value',
+        hpMax: 'system.status.wounds.max',
+        zeroIsBad: true,
+      }
+    else return undefined
   } else if (game.system.id === 'alienrpg') {
-    return data.system?.header?.health?.value
+    if (actor.type !== 'spacecraft' && actor.type !== 'vehicles')
+      return {
+        hpValue: 'system.header.health.value',
+        hpMax: 'system.header.health.max',
+        zeroIsBad: true,
+      }
+    else return undefined
   } else if (game.system.id === 'pf1') {
-    return data.system?.attributes?.hp?.value
+    return {
+      hpValue: 'system.attributes.hp.value',
+      hpMax: 'system.attributes.hp.max',
+      zeroIsBad: true,
+    }
   } else if (game.system.id === 'tormenta20') {
-    return data.system?.attributes?.pv?.value
+    return {
+      hpValue: 'system.attributes.pv.value',
+      hpMax: 'system.attributes.pv.max',
+      zeroIsBad: true,
+    }
   } else {
     // not a supported system
     return undefined
   }
+}
+
+export const systemBasedHpFromActor = (actor) => {
+  const dataKeys = systemBasedHpKeys(actor)
+  if (dataKeys === undefined)
+    return {
+      currentHp: undefined,
+      maxHp: undefined,
+    }
+
+  // normalize to the "zero is bad" standard, i.e. taking damage decreases the value, down from max to 0, not up
+  const currentHpKey = dataKeys.zeroIsBad ? dataKeys.hpValue : (dataKeys.hpMax - dataKeys.hpValue)
+  const maxHpKey = dataKeys.hpMax
+
+  return {
+    currentHp: getProperty(actor, currentHpKey),
+    maxHp: getProperty(actor, maxHpKey),
+  }
+}
+export const systemBasedHpFromUpdate = (actor, data) => {
+  const dataKeys = systemBasedHpKeys(actor)
+  if (dataKeys === undefined)
+    return undefined
+
+  // normalize to the "zero is bad" standard, i.e. taking damage decreases the value, down from max to 0, not up
+  const currentHpKey = dataKeys.zeroIsBad ? dataKeys.hpValue : (dataKeys.hpMax - dataKeys.hpValue)
+
+  return getProperty(data, currentHpKey)
 }
