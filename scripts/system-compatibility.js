@@ -63,6 +63,39 @@ const systemBasedHpKeys = (actor) => {
       hpMax: 'system.attributes.pv.max',
       zeroIsBad: true,
     }
+
+  } else if (game.system.id === 'pbta') {
+    if (actor.system?.attrTop?.harm !== undefined)
+      // default for most PBTA-based systems
+      // e.g. Monster of the Week
+      return {
+        hpValue: 'system.attrTop.harm.value',
+        hpMax: 'system.attrTop.harm.max',
+        zeroIsBad: false,
+      }
+    else if (actor.system?.attrTop?.hp !== undefined)
+      // World of Dungeons
+      return {
+        hpValue: 'system.attrTop.hp.value',
+        hpMax: 'system.attrTop.hp.max',
+        zeroIsBad: false,
+      }
+    else if (actor.system?.attrTop?.hurt !== undefined)
+      // Dungeon Bitches (maybe?)
+      return {
+        hpValue: 'system.attrTop.hurt.value',
+        hpMax: 'system.attrTop.hurt.max',
+        zeroIsBad: false,
+      }
+    else if (actor.system?.attributesTop?.hurt !== undefined)
+      // Dungeon Bitches (maybe?)
+      return {
+        hpValue: 'system.attributesTop.hurt.value',
+        hpMax: 'system.attributesTop.hurt.max',
+        zeroIsBad: false,
+      }
+    else // unsupported PBTA system, e.g Root, or Fantasy World RPG, all the ones that don't call their thing "Harm"
+      return undefined
   } else {
     // not a supported system
     return undefined
@@ -77,13 +110,13 @@ export const systemBasedHpFromActor = (actor) => {
       maxHp: undefined,
     }
 
-  // normalize to the "zero is bad" standard, i.e. taking damage decreases the value, down from max to 0, not up
-  const currentHpKey = dataKeys.zeroIsBad ? dataKeys.hpValue : (dataKeys.hpMax - dataKeys.hpValue)
-  const maxHpKey = dataKeys.hpMax
+  const currentHpInSystem = getProperty(actor, dataKeys.hpValue)
+  const maxHpInSystem = getProperty(actor, dataKeys.hpMax)
 
+  // normalize to the "zero is bad" standard, i.e. taking damage decreases the value, down from max to 0, not up
   return {
-    currentHp: getProperty(actor, currentHpKey),
-    maxHp: getProperty(actor, maxHpKey),
+    currentHp: dataKeys.zeroIsBad ? currentHpInSystem : (maxHpInSystem - currentHpInSystem),
+    maxHp: maxHpInSystem,
   }
 }
 export const systemBasedHpFromUpdate = (actor, data) => {
@@ -91,8 +124,9 @@ export const systemBasedHpFromUpdate = (actor, data) => {
   if (dataKeys === undefined)
     return undefined
 
-  // normalize to the "zero is bad" standard, i.e. taking damage decreases the value, down from max to 0, not up
-  const currentHpKey = dataKeys.zeroIsBad ? dataKeys.hpValue : (dataKeys.hpMax - dataKeys.hpValue)
+  const currentHpInSystem = getProperty(data, dataKeys.hpValue)
+  const maxHpInSystem = getProperty(actor, dataKeys.hpMax)
 
-  return getProperty(data, currentHpKey)
+  // normalize to the "zero is bad" standard, i.e. taking damage decreases the value, down from max to 0, not up
+  return dataKeys.zeroIsBad ? currentHpInSystem : (maxHpInSystem - currentHpInSystem)
 }
