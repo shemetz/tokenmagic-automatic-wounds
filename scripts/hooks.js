@@ -1,7 +1,7 @@
-import { registerAutomaticWoundEffects, hookAutomaticWoundEffects } from './tokenmagic-automatic-wounds.js'
+import { registerAutomaticWoundEffectsSettings, hookAutomaticWoundEffects } from './tokenmagic-automatic-wounds.js'
 
 Hooks.on('init', () => {
-  registerAutomaticWoundEffects()
+  registerAutomaticWoundEffectsSettings()
 })
 
 Hooks.on('ready', () => {

@@ -11,10 +11,20 @@ const MINIMUM_LEFTOVER_WOUND_SCALE = 0.03
 const AUTOMATIC_FILTER_ID = 'automaticWoundEffect'
 const DEFAULT_BLOOD_COLOR = '0x990505'
 
-export const registerAutomaticWoundEffects = () => {
+export const registerAutomaticWoundEffectsSettings = () => {
   game.settings.register(MODULE_ID, 'clear-wounds-on-full-heal', {
     name: `Clear wounds on full heal`,
     hint: `When a token's health goes back to maximum, should it fully remove all wounds?`,
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: true,
+  })
+  game.settings.register(MODULE_ID, 'token-images-are-circular', {
+    name: `Token images are circular`,
+    hint: `Should the code spread wounds in a circle pattern?  If you have square token images, toggle this off, so
+    that wounds can appear everywhere on the token (in a square pattern) without always leaving empty corners.  If you
+    use top-down tokens you probably still want to keep this setting on.`,
     scope: 'world',
     config: true,
     type: Boolean,
@@ -43,7 +53,7 @@ const onPreUpdateActor = (actor, data) => {
 }
 
 const createWoundOnToken = async (token, damageFraction) => {
-  const isImageCircular = true  // TODO add some config option or smart code to detect square tokens
+  const isImageCircular = game.settings.get(MODULE_ID, 'token-images-are-circular')
   const woundScale = Math.max(MINIMUM_CREATED_WOUND_SCALE, damageFraction * DAMAGE_SCALE_MULTIPLIER)
   const bloodColor = token.actor.getFlag(MODULE_ID, FLAG_BLOOD_COLOR)
     || getSplatterBloodColor(token)

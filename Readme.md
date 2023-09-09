@@ -21,7 +21,7 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Whenever an actor is dealt damage, a "repeatable splash wound" special effect will be applied to the token, making it
   look like an open wound has appeared.
 - Wounds will appear in a random circle position on the token, with size depending on the amount of damage dealt.
-- Healing applied to the actor will make existing wounds shrink or disappear, depending on amou of healing.
+- Healing applied to the actor will make existing wounds shrink or disappear, depending on amount of healing.
 - (Configurable) Wound colors is red by default.
 - (Configurable) All wounds will disappear when a token is fully healed.
 
@@ -37,8 +37,22 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Alien RPG
 - Pathfinder 1e (pf1)
 - Tormenta20
+- PBTA - not everything, but yes to:  Monster of the Week, World of Dungeons, Dungeon Bitches
 
 More can be added easily by request / PR!
+
+## Settings
+
+There is a setting to "Clear wounds on full heal"; this is because wound size from damage and wound reduction from
+healing don't exactly match 1-to-1 (because it would be hard to get them to). So, there's a chance a token could be
+dealt a series of damaging and healing actions, culminating in it having some large visible wounds, but nearly full HP.
+By keeping this setting on, you will ensure that all blood on the token will disappear once the final hit point is
+restored and the token is fully healthy again.
+
+There is a setting to change the spread of wound placement from circle to square; useful for the few players who prefer
+to use square shaped tokens in their games.
+
+![](metadata/Screenshot_2.png)
 
 # Macros (in "TokenMagic Automatic Wounds" compendium pack)
 
