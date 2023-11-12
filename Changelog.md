@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is loosely based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+##  [1.1.4] - 2023-11-12
+- Added OSE system compatibility
+
 ##  [1.1.3] - 2023-09-09
 - Added PBTA system compatibility (for *some* PBTA based systems) (#20)
 - Added setting to use square pattern of wounds rather than circle
@@ -65,4 +68,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.9]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.0.8...1.0.9
 [1.1.0]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.0.9...1.1.0
 [1.1.3]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.0...1.1.3
-[Unreleased]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.3...HEAD
+[1.1.4]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.3...1.1.4
+[Unreleased]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.4...HEAD
