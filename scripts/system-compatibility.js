@@ -63,7 +63,6 @@ const systemBasedHpKeys = (actor) => {
       hpMax: 'system.attributes.pv.max',
       zeroIsBad: true,
     }
-
   } else if (game.system.id === 'pbta') {
     if (actor.system?.attrTop?.harm !== undefined)
       // default for most PBTA-based systems
@@ -96,6 +95,12 @@ const systemBasedHpKeys = (actor) => {
       }
     else // unsupported PBTA system, e.g Root, or Fantasy World RPG, all the ones that don't call their thing "Harm"
       return undefined
+  } else if (game.system.id === 'ose-dev') {
+    return {
+      hpValue: 'system.hp.value',
+      hpMax: 'system.hp.max',
+      zeroIsBad: true,
+    }
   } else {
     // not a supported system
     return undefined

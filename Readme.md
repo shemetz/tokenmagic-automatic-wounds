@@ -38,6 +38,7 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Pathfinder 1e (pf1)
 - Tormenta20
 - PBTA - not everything, but yes to:  Monster of the Week, World of Dungeons, Dungeon Bitches
+- Old School Essentials (ose-dev)
 
 More can be added easily by request / PR!
 
