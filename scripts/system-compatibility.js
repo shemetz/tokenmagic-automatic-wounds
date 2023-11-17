@@ -95,7 +95,7 @@ const systemBasedHpKeys = (actor) => {
       }
     else // unsupported PBTA system, e.g Root, or Fantasy World RPG, all the ones that don't call their thing "Harm"
       return undefined
-  } else if (game.system.id === 'ose-dev') {
+  } else if (game.system.id === 'ose') {
     return {
       hpValue: 'system.hp.value',
       hpMax: 'system.hp.max',
