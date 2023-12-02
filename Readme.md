@@ -61,9 +61,6 @@ to use square shaped tokens in their games.
 
 Will set the current token's actor's blood color to the specified color (affecting existing wounds).
 
-Note that due to a TokenMagic bug ([#184](https://github.com/Feu-Secret/Tokenmagic/issues/184)), this will not work with
-colors that are too dark.
-
 #### Reapply Wounds Based On Current HP
 
 Will remove any existing wounds on the selected token(s) and then create new wounds that fit the tokens' HP.
