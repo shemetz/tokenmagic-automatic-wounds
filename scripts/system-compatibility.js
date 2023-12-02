@@ -106,6 +106,12 @@ const systemBasedHpKeys = (actor) => {
     return undefined
   }
 }
+export const systemBasedUpdateShouldBeIgnored = (actor, data) => {
+  if (game.system.id === 'pf2e')
+    if (data?.system?.attributes?.adjustment !== undefined)
+      return true
+  return false
+}
 
 export const systemBasedHpFromActor = (actor) => {
   const dataKeys = systemBasedHpKeys(actor)

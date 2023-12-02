@@ -1,4 +1,8 @@
-import { systemBasedHpFromActor, systemBasedHpFromUpdate } from './system-compatibility.js'
+import {
+  systemBasedHpFromActor,
+  systemBasedHpFromUpdate,
+  systemBasedUpdateShouldBeIgnored,
+} from './system-compatibility.js'
 import { getSplatterBloodColor } from './module-compatibility.js'
 
 const MODULE_ID = 'tokenmagic-automatic-wounds'
@@ -42,6 +46,7 @@ const onPreUpdateActor = (actor, data) => {
   if (currentHp === undefined || maxHp === undefined) return
   const oldHp = currentHp
   const newHp = systemBasedHpFromUpdate(actor, data)
+  if (systemBasedUpdateShouldBeIgnored(actor, data)) return
   if (newHp === undefined) return
   const hpDiff = newHp - oldHp
   if (!hpDiff || newHp > maxHp) return
