@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is loosely based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+##  [1.1.6] - 2023-12-02
+- Fixed pf2e bug - Elite and Weak adjustments triggered wounds
+
 ##  [1.1.5] - 2023-11-17
 - Added OSE system compatibility
 
@@ -69,4 +72,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.1.0]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.0.9...1.1.0
 [1.1.3]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.0...1.1.3
 [1.1.5]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.3...1.1.5
-[Unreleased]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.5...HEAD
+[1.1.6]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.5...1.1.6
+[Unreleased]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.6...HEAD
