@@ -129,8 +129,8 @@ const removeWoundsOnToken = async (token) => {
   if (!numOfWounds) {
     return
   }
-  const workingFlags = existingFlags
-    .filter(flag => !(flag.tmFilters && flag.tmFilters.tmFilterId === AUTOMATIC_FILTER_ID))
+  const workingFlags = existingFlags.filter(
+    flag => !(flag.tmFilters && flag.tmFilters.tmFilterId === AUTOMATIC_FILTER_ID))
   return token._TMFXsetFlag(workingFlags)
 }
 
@@ -163,13 +163,12 @@ const setBloodColor = async (token, newColor) => {
   if (!numOfWounds) {
     return
   }
-  const workingFlags = existingFlags
-    .map(flag => {
-      if (!(flag.tmFilters && flag.tmFilters.tmFilterId === AUTOMATIC_FILTER_ID)) return flag
-      flag.tmFilters.tmParams.color = okayColor
-      flag.tmFilters.tmParams.updateId = randomID()
-      return flag
-    })
+  const workingFlags = existingFlags.map(flag => {
+    if (!(flag.tmFilters && flag.tmFilters.tmFilterId === AUTOMATIC_FILTER_ID)) return flag
+    flag.tmFilters.tmParams.color = okayColor
+    flag.tmFilters.tmParams.updateId = randomID()
+    return flag
+  })
   await token._TMFXsetFlag(workingFlags)
 }
 
