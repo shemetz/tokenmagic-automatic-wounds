@@ -88,6 +88,7 @@ const createWoundOnToken = async (token, damageFraction) => {
         dimX: 1,
         dimY: 1,
         cut: false,
+        sticky: true,
         textureAlphaBlend: true,
         anchorX,
         anchorY,
