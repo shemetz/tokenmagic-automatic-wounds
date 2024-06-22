@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is loosely based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+##  [1.1.8] - 2024-06-22
+- Updated code for Foundry V12
+- Maybe fixed SWADE bug (#22)
+
 ##  [1.1.7] - 2023-12-19
 - Fixed: blood effect will now stick in relative rotation (thanks @Donkko)
 
@@ -77,4 +81,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.1.5]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.3...1.1.5
 [1.1.6]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.5...1.1.6
 [1.1.7]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.6...1.1.7
-[Unreleased]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.7...HEAD
+[1.1.8]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.7...1.1.8
+[Unreleased]: https://github.com/shemetz/tokenmagic-automatic-wounds/compare/1.1.8...HEAD
