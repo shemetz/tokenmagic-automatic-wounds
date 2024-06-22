@@ -25,7 +25,7 @@ const systemBasedHpKeys = (actor) => {
     }
   } else if (game.system.id === 'swade') {
     return {
-      hpValue: 'actor.system.wounds.value',
+      hpValue: 'system.wounds.value',
       hpMax: 'system.wounds.max',
       zeroIsBad: false,
     }
