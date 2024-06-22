@@ -121,8 +121,8 @@ export const systemBasedHpFromActor = (actor) => {
       maxHp: undefined,
     }
 
-  const currentHpInSystem = getProperty(actor, dataKeys.hpValue)
-  const maxHpInSystem = getProperty(actor, dataKeys.hpMax)
+  const currentHpInSystem = foundry.utils.getProperty(actor, dataKeys.hpValue)
+  const maxHpInSystem = foundry.utils.getProperty(actor, dataKeys.hpMax)
 
   // normalize to the "zero is bad" standard, i.e. taking damage decreases the value, down from max to 0, not up
   return {
@@ -135,8 +135,8 @@ export const systemBasedHpFromUpdate = (actor, data) => {
   if (dataKeys === undefined)
     return undefined
 
-  const currentHpInSystem = getProperty(data, dataKeys.hpValue)
-  const maxHpInSystem = getProperty(actor, dataKeys.hpMax)
+  const currentHpInSystem = foundry.utils.getProperty(data, dataKeys.hpValue)
+  const maxHpInSystem = foundry.utils.getProperty(actor, dataKeys.hpMax)
 
   // normalize to the "zero is bad" standard, i.e. taking damage decreases the value, down from max to 0, not up
   return dataKeys.zeroIsBad ? currentHpInSystem : (maxHpInSystem - currentHpInSystem)

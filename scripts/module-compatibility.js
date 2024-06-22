@@ -4,11 +4,11 @@ export const getSplatterBloodColor = (token) => {
   // note:  I had to copy and edit some code from the splatter module, because the BloodSplatter class is not exported
 
   function getCreatureType (actorData) {
-    return getProperty(actorData.system, game.settings.get('splatter', 'creatureType')) ?? actorData.type
+    return foundry.utils.getProperty(actorData.system, game.settings.get('splatter', 'creatureType')) ?? actorData.type
   }
 
   function getCreatureTypeCustom (actorData) {
-    return getProperty(
+    return foundry.utils.getProperty(
       actorData.system,
       game.settings.get('splatter', 'creatureTypeCustom'),
     )

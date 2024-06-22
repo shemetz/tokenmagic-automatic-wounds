@@ -107,7 +107,7 @@ const healWoundsOnToken = async (token, healingFraction) => {
 
   const workingFlags = []
   existingFlags.forEach(originalFlag => {
-    const flag = duplicate(originalFlag)
+    const flag = foundry.utils.duplicate(originalFlag)
     if (flag.tmFilters && flag.tmFilters.tmFilterId === AUTOMATIC_FILTER_ID) {
       // shrink visible wounds
       const oldSpread = flag.tmFilters.tmParams.spread
@@ -117,7 +117,7 @@ const healWoundsOnToken = async (token, healingFraction) => {
         return
       }
       flag.tmFilters.tmParams.spread = newSpread
-      flag.tmFilters.tmParams.updateId = randomID()
+      flag.tmFilters.tmParams.updateId = foundry.utils.randomID()
     }
     workingFlags.push(flag)
   })
@@ -167,7 +167,7 @@ const setBloodColor = async (token, newColor) => {
   const workingFlags = existingFlags.map(flag => {
     if (!(flag.tmFilters && flag.tmFilters.tmFilterId === AUTOMATIC_FILTER_ID)) return flag
     flag.tmFilters.tmParams.color = okayColor
-    flag.tmFilters.tmParams.updateId = randomID()
+    flag.tmFilters.tmParams.updateId = foundry.utils.randomID()
     return flag
   })
   await token._TMFXsetFlag(workingFlags)
