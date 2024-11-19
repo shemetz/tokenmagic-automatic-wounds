@@ -39,6 +39,8 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Tormenta20
 - PBTA - not everything, but yes to:  Monster of the Week, World of Dungeons, Dungeon Bitches
 - Old School Essentials (ose)
+- Everyday Heroes
+- Earthdawn 4e
 
 More can be added easily by request / PR!
 

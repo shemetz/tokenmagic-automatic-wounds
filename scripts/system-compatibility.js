@@ -101,6 +101,18 @@ const systemBasedHpKeys = (actor) => {
       hpMax: 'system.hp.max',
       zeroIsBad: true,
     }
+  } else if (game.system.id === 'everyday-heroes') {
+    return {
+      hpValue: 'attributes.hp.value',
+      hpMax: 'attributes.hp.max',
+      zeroIsBad: true,
+    }
+  } else if (game.system.id === 'earthdawn4e') {
+    return {
+      hpValue: 'system.damage.value',
+      hpMax: 'system.damage.max',
+      zeroIsBad: false,
+    }
   } else {
     // not a supported system
     return undefined
