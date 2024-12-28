@@ -17,6 +17,12 @@ const systemBasedHpKeys = (actor) => {
       hpMax: 'system.attributes.hp.max',
       zeroIsBad: true,
     }
+  } else if (game.system.id === 'dcc') {
+    return {
+      hpValue: 'system.attributes.hp.value',
+      hpMax: 'system.attributes.hp.max',
+      zeroIsBad: true,
+    }
   } else if (game.system.id === 'cyberpunk-red-core') {
     return {
       hpValue: 'system.derivedStats.hp.value',
