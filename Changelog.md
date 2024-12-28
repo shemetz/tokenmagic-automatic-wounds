@@ -1,3 +1,6 @@
+##  1.1.11 - 2024-12-28
+- Added support for Dungeon Crawl Classics (#26)
+
 ##  1.1.10 - 2024-11-19
 - Added support for Everyday Heroes and Earthdawn 4e (#24, #25)
 
