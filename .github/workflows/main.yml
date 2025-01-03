@@ -1,5 +1,6 @@
 # Shemetz's FoundryVTT Package Release Workflow -- last updated 2025-01-03
 # To work with this, create a New Tag for the new version's commit, e.g. "v1.2.3"  (the v is important)
+# and then push the tag (pushing the branch is not enough!).
 #
 # This workflow will:
 # 1. Create a new release on GitHub with the tag name
