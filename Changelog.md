@@ -1,3 +1,6 @@
+##  1.1.12-b - 2025-01-03
+- Updated github workflow
+
 ##  1.1.11 - 2024-12-28
 - Added support for Dungeon Crawl Classics (#26)
 
