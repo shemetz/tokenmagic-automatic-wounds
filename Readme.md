@@ -29,6 +29,7 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 
 - Pathfinder 2e (pf2e)
 - D&D 5e (dnd5e)
+- D&D 4e (dnd4e)
 - Dungeon World (dungeonworld)
 - Cyberpunk RED (cyberpunk-red-core)
 - Savage Worlds Adventure Edition (SWADE)
