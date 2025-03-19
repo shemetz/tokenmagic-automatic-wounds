@@ -25,24 +25,24 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - (Configurable) Wound colors is red by default.
 - (Configurable) All wounds will disappear when a token is fully healed.
 
-# Supported systems
+# Supported systems (in alphabetical order)
 
-- Pathfinder 2e (pf2e)
-- D&D 5e (dnd5e)
-- D&D 4e (dnd4e)
-- Dungeon World (dungeonworld)
-- Cyberpunk RED (cyberpunk-red-core)
-- Savage Worlds Adventure Edition (SWADE)
-- HeXXen 1733 (hexxen-1733)
-- Warhammer Fantasy Roleplay 4e (wfrp4e)
 - Alien RPG
-- Pathfinder 1e (pf1)
-- Tormenta20
-- PBTA - not everything, but yes to:  Monster of the Week, World of Dungeons, Dungeon Bitches
-- Old School Essentials (ose)
-- Everyday Heroes
+- Cyberpunk RED (cyberpunk-red-core)
+- Dungeon World (dungeonworld)
+- D&D 4e (dnd4e)
+- D&D 5e (dnd5e)
 - Earthdawn 4e
+- Everyday Heroes
+- HeXXen 1733 (hexxen-1733)
+- Old School Essentials (ose)
+- Pathfinder 1e (pf1)
+- Pathfinder 2e (pf2e)
+- PBTA - not everything, but yes to:  Monster of the Week, World of Dungeons, Dungeon Bitches
+- Savage Worlds Adventure Edition (SWADE)
+- Tormenta20
 - Shadowdark RPG
+- Warhammer Fantasy Roleplay 4e (wfrp4e)
 
 More can be added easily by request / PR!
 
