@@ -42,6 +42,7 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Old School Essentials (ose)
 - Everyday Heroes
 - Earthdawn 4e
+- Shadowdark RPG
 
 More can be added easily by request / PR!
 
