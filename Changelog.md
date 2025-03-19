@@ -1,3 +1,6 @@
+##  1.1.14 - 2025-03-19
+- Added support for Shadowdark RPG (#28)
+
 ##  1.1.13 - 2025-02-07
 - Added support for D&D 4e (#27)
 
