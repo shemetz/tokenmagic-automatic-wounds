@@ -1,3 +1,7 @@
+##  1.1.15 - 2025-05-30
+- Added support for Delta Green (#29)
+- Marked as Foundry V13 compatible
+
 ##  1.1.14 - 2025-03-19
 - Added support for Shadowdark RPG (#28)
 
