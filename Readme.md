@@ -29,6 +29,7 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 
 - Alien RPG
 - Cyberpunk RED (cyberpunk-red-core)
+- Delta Green (deltagreen)
 - Dungeon World (dungeonworld)
 - D&D 4e (dnd4e)
 - D&D 5e (dnd5e)
@@ -38,7 +39,10 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Old School Essentials (ose)
 - Pathfinder 1e (pf1)
 - Pathfinder 2e (pf2e)
-- PBTA - not everything, but yes to:  Monster of the Week, World of Dungeons, Dungeon Bitches
+- PBTA - not everything, but yes to:
+    - Monster of the Week
+    - World of Dungeons
+    - Dungeon Bitches
 - Savage Worlds Adventure Edition (SWADE)
 - Tormenta20
 - Shadowdark RPG

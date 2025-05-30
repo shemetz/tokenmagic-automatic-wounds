@@ -53,6 +53,12 @@ const systemBasedHpKeys = (actor) => {
       hpMax: 'system.health.max',
       zeroIsBad: true,
     }
+  } else if (game.system.id === 'deltagreen') {
+    return {
+      hpValue: 'system.health.value',
+      hpMax: 'system.health.max',
+      zeroIsBad: true,
+    }
   } else if (game.system.id === 'wfrp4e') {
     if (actor.type !== 'vehicle')
       return {
