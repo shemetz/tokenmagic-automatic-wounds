@@ -1,0 +1,40 @@
+{
+  "tokenmagic-automatic-wounds": {
+    "setting": {
+      "clear-wounds-on-full-heal": {
+        "name": "Supprimer les blessures après guérison complète",
+        "hint": "Lorsque la santé du jeton revient à son maximum, doit-il supprimer totalement les blessures ?"
+      },
+      "token-images-are-circular": {
+        "name": "Les images des jetons sont circulaires",
+        "hint": "Le code doit-il répartir les blessures selon un motif circulaire ? Si vous utilisez des jetons carrés, désactivez cette option pour que les blessures apparaissent partout sur le jeton (en carré) sans laisser de coins vides. Si vous utilisez des jetons de plein pied, il est préférable de conserver ce paramètre."
+      }
+    },
+    "dialog": {
+      "common": {
+        "cancel": "Supprimer"
+      },
+      "change-blood-color": {
+        "title": "Changer la couleur du sang",
+        "selected-tokens": "Jetons sélectionnés : {tokens}",
+        "currently-defaulting-to-splatter": "Couleur par défaut actuelle des éclaboussures : {color}",
+        "splatter-color": "Couleur des éclaboussures : {color}",
+        "currently-defaulting-to-red": "Actuellement, la couleur par défaut est le rouge : {color}",
+        "buttons": {
+          "set-new-color": "Définir une nouvelle couleur",
+          "reset-to-default": "Réinitialiser à la valeur par défaut : {color}",
+          "reset-to-splatter": "Réinitialiser à éclaboussure : {color}"
+        }
+      }
+    },
+    "notifications": {
+      "disabled-for-actors": "Blessures automatiques : désactivées pour {names} (acteur de la partie)",
+      "enabled-for-actors": "Blessures automatiques : activées pour {names} (acteur de la partie)",
+      "disabled-for-tokens": "Blessures automatiques : désactivées pour {names} (jeton acteur)",
+      "enabled-for-tokens": "Blessures automatiques : activées pour {names} (jeton acteur)",
+      "select-tokens-reapply": "Pour que la macro Réappliquer les blessures en fonction des PV actuels fonctionne, vous devez sélectionner un ou plusieurs jetons.",
+      "no-tokens-selected-for-color-picker": "Aucun jeton sélectionné, impossible d'ouvrir le sélecteur de couleur de sang.",
+      "disabled-on-token-cannot-open-color-picker": "Les blessures automatiques sont désactivées sur ce jeton, impossible d'ouvrir le sélecteur de couleur de sang."
+    }
+  }
+}
