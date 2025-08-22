@@ -8,6 +8,7 @@ import { getSplatterBloodColor } from './module-compatibility.js'
 const MODULE_ID = 'tokenmagic-automatic-wounds'
 const FLAG_BLOOD_COLOR = 'blood-color'
 const FLAG_DISABLE_WOUNDS = 'enabled-for-token'
+const localize = (key, data) => data ? game.i18n.format(`${MODULE_ID}.${key}`, data) : game.i18n.localize(`${MODULE_ID}.${key}`)
 
 const DAMAGE_SCALE_MULTIPLIER = 4.5
 const MINIMUM_CREATED_WOUND_SCALE = 0.08
@@ -17,18 +18,16 @@ const DEFAULT_BLOOD_COLOR = '0x990505'
 
 export const registerAutomaticWoundEffectsSettings = () => {
   game.settings.register(MODULE_ID, 'clear-wounds-on-full-heal', {
-    name: `Clear wounds on full heal`,
-    hint: `When a token's health goes back to maximum, should it fully remove all wounds?`,
+    name: localize('setting.clear-wounds-on-full-heal.name'),
+    hint: localize('setting.clear-wounds-on-full-heal.hint'),
     scope: 'world',
     config: true,
     type: Boolean,
     default: true,
   })
   game.settings.register(MODULE_ID, 'token-images-are-circular', {
-    name: `Token images are circular`,
-    hint: `Should the code spread wounds in a circle pattern?  If you have square token images, toggle this off, so
-    that wounds can appear everywhere on the token (in a square pattern) without always leaving empty corners.  If you
-    use top-down tokens you probably still want to keep this setting on.`,
+    name: localize('setting.token-images-are-circular.name'),
+    hint: localize('setting.token-images-are-circular.hint'),
     scope: 'world',
     config: true,
     type: Boolean,
@@ -181,18 +180,18 @@ const openBloodColorPicker = async (tokens) => {
   const bloodColorInputValue = inputBloodColor.replace('0x', '#')
   const color = await new Promise((resolve) => {
     new Dialog({
-      title: 'Change Blood Color',
+      title: localize('dialog.change-blood-color.title'),
       content: `
 <div class="form-group">
-    <label>Selected tokens: ${tokens.map(t => t.name).join(', ')}</label>
+    <label>${localize('dialog.change-blood-color.selected-tokens', { tokens: tokens.map(t => t.name).join(', ') })}</label>
     <br/>`
         + (
           (splatterBloodColor && [splatterBloodColor, DEFAULT_BLOOD_COLOR].includes(inputBloodColor)) ?
-            `<label>Currently defaulting to Splatter color: ${splatterBloodColor}</label>` :
+            `<label>${localize('dialog.change-blood-color.currently-defaulting-to-splatter', { color: splatterBloodColor })}</label>` :
             splatterBloodColor ?
-              `<label>Splatter color: ${splatterBloodColor}</label>` :
+              `<label>${localize('dialog.change-blood-color.splatter-color', { color: splatterBloodColor })}</label>` :
               inputBloodColor === DEFAULT_BLOOD_COLOR ?
-                `<label>Currently defaulting to red color: ${DEFAULT_BLOOD_COLOR}</label>` :
+                `<label>${localize('dialog.change-blood-color.currently-defaulting-to-red', { color: DEFAULT_BLOOD_COLOR })}</label>` :
                 ``
         ) +
         `   <div>
@@ -203,7 +202,7 @@ const openBloodColorPicker = async (tokens) => {
       buttons: {
         change: {
           icon: '<i class="fas fa-fa-droplet"></i>',
-          label: 'Set new color',
+          label: localize('dialog.change-blood-color.buttons.set-new-color'),
           callback: (html) => {
             const color = html.find('input').val().replace('#', '0x')
             resolve(color)
@@ -212,7 +211,7 @@ const openBloodColorPicker = async (tokens) => {
         ...((inputBloodColor !== DEFAULT_BLOOD_COLOR && splatterBloodColor === undefined) && {
           revertToDefault: {
             icon: '<i class="fas fa-undo"></i>',
-            label: `Reset to default: ${DEFAULT_BLOOD_COLOR} (red)`,
+            label: localize('dialog.change-blood-color.buttons.reset-to-default', { color: DEFAULT_BLOOD_COLOR }),
             callback: () => {
               resolve(null)
             },
@@ -221,7 +220,7 @@ const openBloodColorPicker = async (tokens) => {
         ...((inputBloodColor !== splatterBloodColor && splatterBloodColor !== undefined) && {
           splatter: {
             icon: '<i class="fas fa-undo"></i>',
-            label: `Reset to Splatter: ${splatterBloodColor}`,
+            label: localize('dialog.change-blood-color.buttons.reset-to-splatter', { color: splatterBloodColor }),
             callback: () => {
               resolve(null)
             },
@@ -229,7 +228,7 @@ const openBloodColorPicker = async (tokens) => {
         }),
         cancel: {
           icon: '<i class="fas fa-times"></i>',
-          label: 'Cancel',
+          label: localize('dialog.common.cancel'),
           callback: () => {
             resolve(undefined)
           },
@@ -292,10 +291,10 @@ const macroToggleAutoWoundsForActors = async () => {
     }
   }
   if (disabledNames.length > 0) {
-    ui.notifications.info(`Automatic Wounds: disabled for ${disabledNames.join(', ')} (game actor)`)
+    ui.notifications.info(localize('notifications.disabled-for-actors', { names: disabledNames.join(', ') }))
   }
   if (enabledNames.length > 0) {
-    ui.notifications.info(`Automatic Wounds: enabled for ${enabledNames.join(', ')} (game actor)`)
+    ui.notifications.info(localize('notifications.enabled-for-actors', { names: enabledNames.join(', ') }))
   }
 }
 
@@ -313,10 +312,10 @@ const macroToggleAutoWoundsForTokens = async () => {
     }
   }
   if (disabledNames.length > 0) {
-    ui.notifications.info(`Automatic Wounds: disabled for ${disabledNames.join(', ')} (token actor)`)
+    ui.notifications.info(localize('notifications.disabled-for-tokens', { names: disabledNames.join(', ') }))
   }
   if (enabledNames.length > 0) {
-    ui.notifications.info(`Automatic Wounds: enabled for ${enabledNames.join(', ')} (token actor)`)
+    ui.notifications.info(localize('notifications.enabled-for-tokens', { names: enabledNames.join(', ') }))
   }
 }
 
@@ -324,7 +323,7 @@ const macroReapplyWoundsBasedOnCurrentHp = async () => {
   const tokens = canvas.tokens.controlled
   if (!tokens)
     return ui.notifications.warn(
-      `You need to select token(s) for the Reapply Wounds Based On Current HP macro to work.`)
+      localize('notifications.select-tokens-reapply'))
   for (const tok of tokens) {
     await TokenMagicAutomaticWounds.reapplyWoundsBasedOnCurrentHp(tok)
   }
@@ -333,9 +332,9 @@ const macroReapplyWoundsBasedOnCurrentHp = async () => {
 const macroOpenBloodColorPicker = async () => {
   const tokens = canvas.tokens.controlled
   const firstToken = tokens[0]
-  if (!firstToken) return ui.notifications.warn('No tokens selected, can\'t open blood color picker.')
+  if (!firstToken) return ui.notifications.warn(localize('notifications.no-tokens-selected-for-color-picker'))
   if (firstToken.actor.getFlag(MODULE_ID, FLAG_DISABLE_WOUNDS)) {
-    return ui.notifications.warn('Automatic wounds are disabled on this token, can\'t open blood color picker.')
+    return ui.notifications.warn(localize('notifications.disabled-on-token-cannot-open-color-picker'))
   }
   await TokenMagicAutomaticWounds.openBloodColorPicker(tokens)
 }

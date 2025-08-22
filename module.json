@@ -11,6 +11,13 @@
     "scripts/tokenmagic-automatic-wounds.js",
     "scripts/hooks.js"
   ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
   "packs": [
     {
       "name": "tokenmagic-automatic-wounds-macros",
