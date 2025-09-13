@@ -33,6 +33,20 @@ export const registerAutomaticWoundEffectsSettings = () => {
     type: Boolean,
     default: true,
   })
+  if (game.system.id === "mosh") {
+    game.settings.register(MODULE_ID, 'mosh-attribute', {
+    name: localize('setting.mosh-attribute.name'),
+    hint: localize('setting.mosh-attribute.hint'),
+    scope: 'world',
+    config: true,
+    type: String,
+    choices: { 
+      "netHP" : localize('setting.mosh-attribute.netHP'), //"Use overall HP (netHP)",
+      "wounds" : localize('setting.mosh-attribute.wounds') //"Use wounds"
+    },
+    default: "netHP",
+  })
+  }
 }
 
 export const hookAutomaticWoundEffects = () => {
