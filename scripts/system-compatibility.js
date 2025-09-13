@@ -75,6 +75,14 @@ const systemBasedHpKeys = (actor) => {
         zeroIsBad: true,
       }
     else return undefined
+  } else if (game.system.id === 'mosh') {
+    if (actor.type !== 'ship')
+      return {
+        hpValue: 'system.netHP.value',
+        hpMax: 'system.netHP.max',
+        zeroIsBad: true,
+      }
+    else return undefined
   } else if (game.system.id === 'pf1') {
     return {
       hpValue: 'system.attributes.hp.value',
