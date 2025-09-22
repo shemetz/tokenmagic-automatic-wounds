@@ -1,3 +1,4 @@
+const MODULE_ID = 'tokenmagic-automatic-wounds'
 const systemBasedHpKeys = (actor) => {
   if (game.system.id === 'pf2e') {
     return {
