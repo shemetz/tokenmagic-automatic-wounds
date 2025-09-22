@@ -33,29 +33,21 @@ export const registerAutomaticWoundEffectsSettings = () => {
     type: Boolean,
     default: true,
   })
-  game.settings.register(MODULE_ID, 'manual-override', {
-    name: localize('setting.manual-override.name'),
-    hint: localize('setting.manual-override.hint'),
-    scope: 'world',
-    requiresReload: true,
-    config: true,
-    type: Object,
-    default: {},
-  })
+
   if (game.system.id === "mosh") {
     game.settings.register(MODULE_ID, 'mosh-attribute', {
-    name: localize('setting.mosh-attribute.name'),
-    hint: localize('setting.mosh-attribute.hint'),
-    requiresReload: true, // Could also do a callback
-    scope: 'world',
-    config: true,
-    type: String,
-    choices: { 
-      "netHP" : localize('setting.mosh-attribute.netHP'), 
-      "wounds" : localize('setting.mosh-attribute.wounds')
-    },
-    default: "netHP",
-  })
+      name: localize('setting.mosh-attribute.name'),
+      hint: localize('setting.mosh-attribute.hint'),
+      requiresReload: true, // Could also do a callback
+      scope: 'world',
+      config: true,
+      type: String,
+      choices: {
+        "netHP": localize('setting.mosh-attribute.netHP'),
+        "wounds": localize('setting.mosh-attribute.wounds')
+      },
+      default: "netHP",
+    })
   }
 }
 
@@ -158,7 +150,7 @@ const removeWoundsOnToken = async (token) => {
   return token._TMFXsetFlag(workingFlags)
 }
 
-function rgbToHex (r, g, b) {
+function rgbToHex(r, g, b) {
   return '0x' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
 
