@@ -8,16 +8,6 @@
       "token-images-are-circular": {
         "name": "Token images are circular",
         "hint": "Should the code spread wounds in a circle pattern? If you have square token images, toggle this off, so that wounds can appear everywhere on the token (in a square pattern) without always leaving empty corners. If you use top-down tokens you probably still want to keep this setting on."
-      },
-      "mosh-attribute": {
-        "name": "Mothership attribute",
-        "hint": "Choose between either netHP or Wounds to calculate automatic wounds.",
-        "netHP": "Use overall HP (netHP)",
-        "wounds": "Use only wounds."
-      },
-      "manual-override": {
-        "name": "Manual override",
-        "hint": "[Advanced] Paste a json object for manually setting the attributes."
       }
     },
     "dialog": {
