@@ -76,12 +76,21 @@ const systemBasedHpKeys = (actor) => {
       }
     else return undefined
   } else if (game.system.id === 'mosh') {
-    if (actor.type !== 'ship')
-      return {
-        hpValue: 'system.netHP.value',
-        hpMax: 'system.netHP.max',
-        zeroIsBad: true,
+    if (actor.type !== 'ship') {
+      if (game.settings.get(MODULE_ID, 'mosh-attribute') === 'wounds') {
+        return {
+          hpValue: 'system.hits.value',
+          hpMax: 'system.hits.max',
+          zeroIsBad: false,
+        }
+      } else {
+        return {
+          hpValue: 'system.netHP.value',
+          hpMax: 'system.netHP.max',
+          zeroIsBad: true,
+        }
       }
+    }
     else return undefined
   } else if (game.system.id === 'pf1') {
     return {
