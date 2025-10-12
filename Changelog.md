@@ -1,3 +1,7 @@
+##  1.1.16 - 2025-10-12
+- Added support for Mothership (#31)
+- Added french localization (thanks @rectulo)
+
 ##  1.1.15 - 2025-05-30
 - Added support for Delta Green (#29)
 - Marked as Foundry V13 compatible
