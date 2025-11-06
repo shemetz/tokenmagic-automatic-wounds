@@ -146,6 +146,12 @@ const systemBasedHpKeys = (actor) => {
       hpMax: 'system.damage.max',
       zeroIsBad: false,
     }
+  } else if (game.system.id === 'dragonbane') {
+    return {
+      hpValue: 'system.hitPoints.value',
+      hpMax: 'system.hitPoints.max',
+      zeroIsBad: true,
+    }
   } else {
     // not a supported system
     return undefined
