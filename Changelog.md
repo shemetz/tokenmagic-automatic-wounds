@@ -1,5 +1,6 @@
-##  1.1.17 - 2025-11-09
+##  1.1.18 - 2025-11-09
 - Add support for Dragonbane / Drakar och Demoner (#35)
+- Add support for Draw Steel (#33)
 
 ##  1.1.16 - 2025-10-12
 - Added support for Mothership (#31)
