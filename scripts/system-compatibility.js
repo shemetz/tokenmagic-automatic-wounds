@@ -152,6 +152,12 @@ const systemBasedHpKeys = (actor) => {
       hpMax: 'system.hitPoints.max',
       zeroIsBad: true,
     }
+  } else if (game.system.id === 'draw-steel') {
+    return {
+      hpValue: 'system.stamina.value',
+      hpMax: 'system.stamina.max',
+      zeroIsBad: true,
+    }
   } else {
     // not a supported system
     return undefined
