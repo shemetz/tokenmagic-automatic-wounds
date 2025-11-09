@@ -31,6 +31,7 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Cyberpunk RED (cyberpunk-red-core)
 - Delta Green (deltagreen)
 - Dungeon World (dungeonworld)
+- Dragonbane / Drakar och Demoner (dragonbane)
 - D&D 4e (dnd4e)
 - D&D 5e (dnd5e)
 - Earthdawn 4e

@@ -1,3 +1,6 @@
+##  1.1.17 - 2025-11-09
+- Add support for Dragonbane / Drakar och Demoner (#35)
+
 ##  1.1.16 - 2025-10-12
 - Added support for Mothership (#31)
 - Added french localization (thanks @rectulo)
