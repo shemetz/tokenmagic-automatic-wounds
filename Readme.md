@@ -50,6 +50,7 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Tormenta20
 - Shadowdark RPG
 - Warhammer Fantasy Roleplay 4e (wfrp4e)
+- Warhammer 40,000: Imperium Maledictum (impmal)
 
 More can be added easily by request / PR!
 
