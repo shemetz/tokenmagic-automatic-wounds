@@ -158,7 +158,15 @@ const systemBasedHpKeys = (actor) => {
       hpMax: 'system.stamina.max',
       zeroIsBad: true,
     }
-  } else {
+  } else if (game.system.id === 'impmal') {
+    if (actor.type !== 'vehicle')
+      return {
+        hpValue: 'system.combat.wounds.value',
+        hpMax: 'system.combat.wounds.max',
+        zeroIsBad: false,
+      }
+    else return undefined
+    } else {
     // not a supported system
     return undefined
   }
