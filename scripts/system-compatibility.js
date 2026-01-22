@@ -134,6 +134,12 @@ const systemBasedHpKeys = (actor) => {
       hpMax: 'system.hp.max',
       zeroIsBad: true,
     }
+  } else if (game.system.id === 'mythcraft') {
+    return {
+      hpValue: 'system.hp.value',
+      hpMax: 'system.hp.max',
+      zeroIsBad: true,
+    }
   } else if (game.system.id === 'everyday-heroes') {
     return {
       hpValue: 'attributes.hp.value',
