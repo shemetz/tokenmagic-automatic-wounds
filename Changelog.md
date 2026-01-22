@@ -1,6 +1,10 @@
+##  1.1.19 - 2026-01-22
+- Added support for Warhammer Imperium Maledictum (#36)
+- Added support for Mythcraft (#37)
+
 ##  1.1.18 - 2025-11-09
-- Add support for Dragonbane / Drakar och Demoner (#35)
-- Add support for Draw Steel (#33)
+- Added support for Dragonbane / Drakar och Demoner (#35)
+- Added support for Draw Steel (#33)
 
 ##  1.1.16 - 2025-10-12
 - Added support for Mothership (#31)

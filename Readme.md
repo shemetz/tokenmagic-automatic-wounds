@@ -39,16 +39,17 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Everyday Heroes
 - HeXXen 1733 (hexxen-1733)
 - Mothership (mosh)
+- Mythcraft (mythcraft)
 - Old School Essentials (ose)
 - Pathfinder 1e (pf1)
 - Pathfinder 2e (pf2e)
 - PBTA - not everything, but yes to:
+    - Dungeon Bitches
     - Monster of the Week
     - World of Dungeons
-    - Dungeon Bitches
 - Savage Worlds Adventure Edition (SWADE)
-- Tormenta20
 - Shadowdark RPG
+- Tormenta20
 - Warhammer Fantasy Roleplay 4e (wfrp4e)
 - Warhammer 40,000: Imperium Maledictum (impmal)
 
