@@ -1,3 +1,6 @@
+##  1.1.20 - 2026-01-23
+- Added support for Daggerheart (#38)
+
 ##  1.1.19 - 2026-01-22
 - Added support for Warhammer Imperium Maledictum (#36)
 - Added support for Mythcraft (#37)

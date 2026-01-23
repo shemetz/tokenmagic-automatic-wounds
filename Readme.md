@@ -27,29 +27,30 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 
 # Supported systems (in alphabetical order)
 
-- Alien RPG
+- Alien RPG (alienrpg)
 - Cyberpunk RED (cyberpunk-red-core)
+- Daggerheart (daggerheart)
 - Delta Green (deltagreen)
 - Dungeon World (dungeonworld)
 - Dragonbane / Drakar och Demoner (dragonbane)
 - Draw Steel (draw-steel)
 - D&D 4e (dnd4e)
 - D&D 5e (dnd5e)
-- Earthdawn 4e
-- Everyday Heroes
+- Earthdawn 4e (earthdawn4e)
+- Everyday Heroes (everyday-heroes)
 - HeXXen 1733 (hexxen-1733)
 - Mothership (mosh)
 - Mythcraft (mythcraft)
 - Old School Essentials (ose)
 - Pathfinder 1e (pf1)
 - Pathfinder 2e (pf2e)
-- PBTA - not everything, but yes to:
+- PBTA (pbta) - not everything, but yes to:
     - Dungeon Bitches
     - Monster of the Week
     - World of Dungeons
 - Savage Worlds Adventure Edition (SWADE)
-- Shadowdark RPG
-- Tormenta20
+- Shadowdark RPG (shadowdark)
+- Tormenta20 (tormenta20)
 - Warhammer Fantasy Roleplay 4e (wfrp4e)
 - Warhammer 40,000: Imperium Maledictum (impmal)
 
