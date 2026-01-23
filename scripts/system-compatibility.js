@@ -172,6 +172,12 @@ const systemBasedHpKeys = (actor) => {
         zeroIsBad: false,
       }
     else return undefined
+  } else if (game.system.id === 'daggerheart') {
+    return {
+        hpValue: 'system.resources.hitPoints.value',
+        hpMax: 'system.resources.hitPoints.max',
+        zeroIsBad: false,
+      }
     } else {
     // not a supported system
     return undefined
