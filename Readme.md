@@ -6,7 +6,7 @@
 ![Latest Supported Foundry Version](https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/shemetz/tokenmagic-automatic-wounds/raw/master/module.json)
 
 Will automatically apply TokenMagic visual effects of wounds to tokens based on the number of wounds on the token.
-Healing will reduce wounds.
+Healing will reduce wounds.  Requires [TokenMagic FX](https://github.com/Feu-Secret/Tokenmagic) as a dependency.
 
 To install, browse for it in the module browser,
 or [directly copy the manifest link for the latest release](https://github.com/shemetz/tokenmagic-automatic-wounds/releases/latest/download/module.json)
