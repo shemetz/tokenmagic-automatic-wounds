@@ -2,11 +2,10 @@
   "id": "tokenmagic-automatic-wounds",
   "title": "Token Magic FX - Automatic Wounds",
   "description": "Automatically apply a wound splatter visual effect to damaged tokens",
-  "version": "1.1.22",
+  "version": "1.1.23",
   "compatibility": {
-    "minimum": "11",
-    "maximum": "13",
-    "verified": "13"
+    "minimum": "14",
+    "verified": "14"
   },
   "esmodules": [
     "scripts/tokenmagic-automatic-wounds.js",
@@ -37,7 +36,11 @@
       {
         "id": "tokenmagic",
         "type": "module",
-        "manifest": "https://raw.githubusercontent.com/Feu-Secret/Tokenmagic/master/tokenmagic/module.json"
+        "manifest": "https://raw.githubusercontent.com/Feu-Secret/Tokenmagic/master/tokenmagic/module.json",
+        "compatibility": {
+          "minimum": "0.8.1",
+          "verified": "0.8.1"
+        }
       }
     ]
   },
