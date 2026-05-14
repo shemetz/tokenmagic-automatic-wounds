@@ -120,7 +120,7 @@ const healWoundsOnToken = async (token, healingFraction) => {
     }
     workingFlags.push(flag)
   })
-  return token._TMFXsetFlag(workingFlags)
+  return token.document._TMFXsetFlag(workingFlags)
 }
 
 const removeWoundsOnToken = async (token) => {
@@ -131,7 +131,7 @@ const removeWoundsOnToken = async (token) => {
   }
   const workingFlags = existingFlags.filter(
     flag => !(flag.tmFilters && flag.tmFilters.tmFilterId === AUTOMATIC_FILTER_ID))
-  return token._TMFXsetFlag(workingFlags)
+  return token.document._TMFXsetFlag(workingFlags)
 }
 
 function rgbToHex(r, g, b) {
@@ -169,7 +169,7 @@ const setBloodColor = async (token, newColor) => {
     flag.tmFilters.tmParams.updateId = foundry.utils.randomID()
     return flag
   })
-  await token._TMFXsetFlag(workingFlags)
+  await token.document._TMFXsetFlag(workingFlags)
 }
 
 const openBloodColorPicker = async (tokens) => {
