@@ -1,4 +1,15 @@
+const MODULE_ID = 'tokenmagic-automatic-wounds'
+
 const systemBasedHpKeys = (actor) => {
+  const manualOverride = game.settings.get(MODULE_ID, 'manual-override-hp-keys')
+  if (manualOverride.length > 0 && manualOverride.includes(';')) {
+    // expects the form:  addressToValue;addressToMax;zeroIsBad
+    return {
+      hpValue: manualOverride.split(';')[0].trim(),
+      hpMax: manualOverride.split(';')[1].trim(),
+      zeroIsBad: manualOverride.split(';')[2].trim(),
+    }
+  }
   if (game.system.id === 'pf2e') {
     return {
       hpValue: 'system.attributes.hp.value',
@@ -94,8 +105,7 @@ const systemBasedHpKeys = (actor) => {
         hpMax: 'system.hits.max',
         zeroIsBad: false,
       }
-    }
-    else return undefined
+    } else return undefined
   } else if (game.system.id === 'pf1') {
     return {
       hpValue: 'system.attributes.hp.value',
@@ -186,11 +196,11 @@ const systemBasedHpKeys = (actor) => {
     else return undefined
   } else if (game.system.id === 'daggerheart') {
     return {
-        hpValue: 'system.resources.hitPoints.value',
-        hpMax: 'system.resources.hitPoints.max',
-        zeroIsBad: false,
-      }
-    } else {
+      hpValue: 'system.resources.hitPoints.value',
+      hpMax: 'system.resources.hitPoints.max',
+      zeroIsBad: false,
+    }
+  } else {
     // not a supported system
     return undefined
   }
@@ -211,7 +221,7 @@ export const systemBasedHpFromActor = (actor) => {
     }
 
   const currentHpInSystem = foundry.utils.getProperty(actor, dataKeys.hpValue)
-  const maxHpInSystem = typeof dataKeys.hpMax === "number"
+  const maxHpInSystem = typeof dataKeys.hpMax === 'number'
     ? dataKeys.hpMax
     : foundry.utils.getProperty(actor, dataKeys.hpMax)
 
@@ -227,7 +237,7 @@ export const systemBasedHpFromUpdate = (actor, data) => {
     return undefined
 
   const currentHpInSystem = foundry.utils.getProperty(data, dataKeys.hpValue)
-  const maxHpInSystem = typeof dataKeys.hpMax === "number"
+  const maxHpInSystem = typeof dataKeys.hpMax === 'number'
     ? dataKeys.hpMax
     : foundry.utils.getProperty(actor, dataKeys.hpMax)
 

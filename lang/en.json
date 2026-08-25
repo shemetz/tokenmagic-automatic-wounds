@@ -12,6 +12,10 @@
       "token-images-are-circular": {
         "name": "Token images are circular",
         "hint": "Should the code spread wounds in a circle pattern? If you have square token images, toggle this off, so that wounds can appear everywhere on the token (in a square pattern) without always leaving empty corners. If you use top-down tokens you probably still want to keep this setting on."
+      },
+      "manual-override-hp-keys": {
+        "name": "Manual override for HP keys (for homebrew/rare systems), leave empty to disable",
+        "hint": "Formatting: 'addressToValue;addressToMax;zeroIsBad', e.g. 'system.attributes.hp.value;system.attributes.hp.max;true' for Pathfinder2e. You're welcome to make a PR and add this system to help all future module users!"
       }
     },
     "dialog": {

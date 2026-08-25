@@ -1,3 +1,7 @@
+##  1.1.27 - 2026-08-25
+- Added feature: Shake tokens on hit (default: disabled)
+- Added setting to manually override the system keys, for local support of homebrew/unpublished systems (#32)
+
 ##  1.1.26 - 2026-08-01
 - Added support for Zweihänder (#40)
 

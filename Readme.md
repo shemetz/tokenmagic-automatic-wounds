@@ -24,6 +24,7 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Healing applied to the actor will make existing wounds shrink or disappear, depending on amount of healing.
 - (Configurable) Wound colors is red by default.
 - (Configurable) All wounds will disappear when a token is fully healed.
+- (Optional) When taking damage, the token will also shake a little.
 
 # Supported systems (in alphabetical order)
 
@@ -56,7 +57,7 @@ or [directly copy the manifest link for the latest release](https://github.com/s
 - Warhammer 40,000: Imperium Maledictum (impmal)
 - Zweihänder Grim & Perilous RPG (zweihander)
 
-More can be added easily by request / PR!
+More can be added easily by request / PR!  There is also a setting to locally add support for your own system.
 
 ## Settings
 
@@ -70,6 +71,12 @@ There is a setting to change the spread of wound placement from circle to square
 to use square shaped tokens in their games.
 
 ![](metadata/Screenshot_2.png)
+
+There is a setting to enable token shake on hit.  I'm not entirely satisfied with the effect, which is why it's not
+on by default.
+
+There is a setting to manually override the system keys, for local support of homebrew/unpublished systems.
+
 
 # Macros (in "TokenMagic Automatic Wounds" compendium pack)
 

@@ -41,6 +41,14 @@ export const registerAutomaticWoundEffectsSettings = () => {
     type: Boolean,
     default: true,
   })
+  game.settings.register(MODULE_ID, 'manual-override-hp-keys', {
+    name: localize('setting.manual-override-hp-keys.name'),
+    hint: localize('setting.manual-override-hp-keys.hint'),
+    scope: 'world',
+    config: true,
+    type: String,
+    default: '',
+  })
 }
 
 export const hookAutomaticWoundEffects = () => {
