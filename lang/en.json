@@ -5,6 +5,10 @@
         "name": "Clear wounds on full heal",
         "hint": "When a token's health goes back to maximum, should it fully remove all wounds?"
       },
+      "shake-tokens-on-hit": {
+        "name": "Shake tokens on damage",
+        "hint": "When a token takes damage, should it shake a bit?"
+      },
       "token-images-are-circular": {
         "name": "Token images are circular",
         "hint": "Should the code spread wounds in a circle pattern? If you have square token images, toggle this off, so that wounds can appear everywhere on the token (in a square pattern) without always leaving empty corners. If you use top-down tokens you probably still want to keep this setting on."

@@ -25,6 +25,14 @@ export const registerAutomaticWoundEffectsSettings = () => {
     type: Boolean,
     default: true,
   })
+  game.settings.register(MODULE_ID, 'shake-tokens-on-hit', {
+    name: localize('setting.shake-tokens-on-hit.name'),
+    hint: localize('setting.shake-tokens-on-hit.hint'),
+    scope: 'client',
+    config: true,
+    type: Boolean,
+    default: false,
+  })
   game.settings.register(MODULE_ID, 'token-images-are-circular', {
     name: localize('setting.token-images-are-circular.name'),
     hint: localize('setting.token-images-are-circular.hint'),
@@ -51,8 +59,10 @@ const onPreUpdateActor = (actor, data) => {
   if (!hpDiff || newHp > maxHp) return
   for (const token of actor.getActiveTokens()) {
     if (newHp >= maxHp && game.settings.get(MODULE_ID, 'clear-wounds-on-full-heal')) removeWoundsOnToken(token)
-    else if (hpDiff < 0) createWoundOnToken(token, -hpDiff / maxHp)
-    else healWoundsOnToken(token, hpDiff / maxHp)
+    else if (hpDiff < 0) {
+      createWoundOnToken(token, -hpDiff / maxHp)
+        .then(() => shakeToken(token, -hpDiff / maxHp))
+    } else healWoundsOnToken(token, hpDiff / maxHp)
   }
 }
 
@@ -134,7 +144,20 @@ const removeWoundsOnToken = async (token) => {
   return token.document._TMFXsetFlag(workingFlags)
 }
 
-function rgbToHex(r, g, b) {
+const shakeToken = async (token, damageFraction) => {
+  if (!game.settings.get(MODULE_ID, 'shake-tokens-on-hit')) return undefined
+
+  const shake = new foundry.canvas.animation.CanvasShakeEffect({
+    target: token.mesh,
+    duration: 500 + damageFraction * 400,
+    maxDisplacement: (0.05 + damageFraction * 0.3) * token.width,
+    smoothness: 0.6,
+    returnSpeed: 0.2,
+  })
+  return shake.play()
+}
+
+function rgbToHex (r, g, b) {
   return '0x' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
 
